@@ -3,6 +3,27 @@
     <string name="By_Rishi">By Rishi Dholliwar</string>
     <string name="By_Ali">Ali</string>
     <string name="Main_Menu">Main Menu</string>
+    <string name="Play_Game">Play Game!</string>
+    <string name="Options">Options</string>
+    <string name="Help">Help</string>
+    <string name="Settings">Settings</string>
+    <string name="Board_size">Board size</string>
+    <string name="Num_Mines"># Mines</string>
+
+    <string-array name="Spin_Board_sizes">
+        <item>4 x 6</item>
+        <item>5 x 10</item>
+        <item>6 x 15</item> </string-array>
+
+
+    <string-array name="Spin_Mine_Num">
+        <item>6</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item></string-array>
+    <string name="Erase_times_played">Erase times played</string>
+
+
 
 
 </resources>
