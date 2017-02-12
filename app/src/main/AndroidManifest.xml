@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".WelcomeScreen"
-            android:configChanges="orientation|screenSize"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenu" />
-        <activity android:name=".Options" />
-        <activity android:name=".HelpActivity" />
-        <activity android:name=".PlayGameActivity"></activity>
+        <activity
+            android:name=".MainMenu"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Options"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".HelpActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".PlayGameActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

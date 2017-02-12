@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.renderscript.RSInvalidStateException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.security.InvalidParameterException;
 
 import static android.R.attr.data;
 import static android.R.attr.paddingStart;
@@ -72,21 +75,22 @@ public class Options extends AppCompatActivity {
         Button btn = (Button) findViewById(R.id.btn_EraseTimesPlayed);
         btn.setOnClickListener(new View.OnClickListener() {
             Intent returnIntent = new Intent();
+
             @Override
             public void onClick(View v) {
                 returnIntent.putExtra(ERASE_TIMES_PLAYED, RESET_PLAYS);
                 setResult(Activity.RESULT_OK, returnIntent);
             }
         });
-
     }
 
     private void setupBoardSizeSpin() {
 
         boardSizeSpin = (Spinner) findViewById(R.id.spin_BoardSize);
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Options.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Spin_Board_sizes));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(Options.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.Spin_Board_sizes));
 
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         boardSizeSpin.setAdapter(myAdapter);
@@ -102,23 +106,19 @@ public class Options extends AppCompatActivity {
                 if (position == FOUR_BY_SIX) {
                     returnIntent.putExtra(BOARD_SIZE, FOUR_BY_SIX);
                     setResult(Activity.RESULT_OK, returnIntent);
-                }
-
-                if (position == FIVE_BY_TEN) {
+                } else if (position == FIVE_BY_TEN) {
                     returnIntent.putExtra(BOARD_SIZE, FIVE_BY_TEN);
                     setResult(Activity.RESULT_OK, returnIntent);
-                }
-
-                if (position == SIX_BY_FIFTEEN) {
+                } else if (position == SIX_BY_FIFTEEN) {
                     returnIntent.putExtra(BOARD_SIZE, SIX_BY_FIFTEEN);
                     setResult(Activity.RESULT_OK, returnIntent);
+                } else {
+                    throw new InvalidParameterException();
                 }
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -127,8 +127,9 @@ public class Options extends AppCompatActivity {
 
         mineNumSpin = (Spinner) findViewById(R.id.spin_MineNum);
 
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Options.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Spin_Mine_Num));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(Options.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.Spin_Mine_Num));
 
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mineNumSpin.setAdapter(myAdapter);
@@ -144,28 +145,22 @@ public class Options extends AppCompatActivity {
                 if (position == SIX_MINES) {
                     returnIntent.putExtra(MINE_NUMBER, SIX_MINES);
                     setResult(Activity.RESULT_OK, returnIntent);
-                }
-
-                if (position == TEN_MINES) {
+                } else if (position == TEN_MINES) {
                     returnIntent.putExtra(MINE_NUMBER, TEN_MINES);
                     setResult(Activity.RESULT_OK, returnIntent);
-                }
-
-                if (position == FIFTEEN_MINES) {
+                } else if (position == FIFTEEN_MINES) {
                     returnIntent.putExtra(MINE_NUMBER, FIFTEEN_MINES);
                     setResult(Activity.RESULT_OK, returnIntent);
-                }
-
-                if (position == TWENTY_MINES) {
+                } else if (position == TWENTY_MINES) {
                     returnIntent.putExtra(MINE_NUMBER, TWENTY_MINES);
                     setResult(Activity.RESULT_OK, returnIntent);
+                } else {
+                    throw new InvalidParameterException();
                 }
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
@@ -177,6 +172,4 @@ public class Options extends AppCompatActivity {
         editor.putInt(subFile, position);
         editor.apply();
     }
-
-
 }
