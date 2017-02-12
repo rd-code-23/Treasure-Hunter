@@ -38,8 +38,12 @@ public class Options extends AppCompatActivity {
     public static final String ERASE_TIMES_PLAYED = "erasePlays";
     public static final int RESET_PLAYS = 1;
 
-    Spinner  mineNumSpin;
+    Spinner mineNumSpin;
     Spinner boardSizeSpin;
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, Options.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,43 +54,39 @@ public class Options extends AppCompatActivity {
         setupMineNumberSpin();
         setupEraseTimesPlayedButton();
         loadSpinners();
-
     }
 
-    private void loadSpinners(){
+    private void loadSpinners() {
+        SharedPreferences sharedPref = getSharedPreferences(SAVE_BOARD_SIZE, Context.MODE_PRIVATE);
+        int boardSpinVal = sharedPref.getInt(GET_BOARD_POSITION, -1);
+        if (boardSpinVal != -1)
+            boardSizeSpin.setSelection(boardSpinVal);
 
-
-        SharedPreferences sharedPref = getSharedPreferences(SAVE_BOARD_SIZE,Context.MODE_PRIVATE);
-        int boardSpinVal = sharedPref.getInt(GET_BOARD_POSITION,-1);
-        if(boardSpinVal != -1)
-        boardSizeSpin.setSelection(boardSpinVal);
-
-        sharedPref = getSharedPreferences(SAVE_MINE_NUMBER,Context.MODE_PRIVATE);
-        int mineSpinVal = sharedPref.getInt(GET_MINE_POSITION,-1);
-        if(mineSpinVal != -1)
+        sharedPref = getSharedPreferences(SAVE_MINE_NUMBER, Context.MODE_PRIVATE);
+        int mineSpinVal = sharedPref.getInt(GET_MINE_POSITION, -1);
+        if (mineSpinVal != -1)
             mineNumSpin.setSelection(mineSpinVal);
     }
-    private void  setupEraseTimesPlayedButton(){
+
+    private void setupEraseTimesPlayedButton() {
         Button btn = (Button) findViewById(R.id.btn_EraseTimesPlayed);
-            btn.setOnClickListener(new View.OnClickListener(){
-
-                Intent returnIntent = new Intent();
-
-                @Override
-                public void onClick (View v){
-                    returnIntent.putExtra(ERASE_TIMES_PLAYED, RESET_PLAYS);
-                    setResult(Activity.RESULT_OK, returnIntent);
+        btn.setOnClickListener(new View.OnClickListener() {
+            Intent returnIntent = new Intent();
+            @Override
+            public void onClick(View v) {
+                returnIntent.putExtra(ERASE_TIMES_PLAYED, RESET_PLAYS);
+                setResult(Activity.RESULT_OK, returnIntent);
             }
-            });
+        });
 
     }
 
-    private void setupBoardSizeSpin(){
+    private void setupBoardSizeSpin() {
 
         boardSizeSpin = (Spinner) findViewById(R.id.spin_BoardSize);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Options.this,
-                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Spin_Board_sizes));
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Spin_Board_sizes));
 
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         boardSizeSpin.setAdapter(myAdapter);
@@ -95,21 +95,21 @@ public class Options extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                save(SAVE_BOARD_SIZE,GET_BOARD_POSITION,position);
+                save(SAVE_BOARD_SIZE, GET_BOARD_POSITION, position);
 
                 Intent returnIntent = new Intent();
 
-                if(position == FOUR_BY_SIX){
+                if (position == FOUR_BY_SIX) {
                     returnIntent.putExtra(BOARD_SIZE, FOUR_BY_SIX);
                     setResult(Activity.RESULT_OK, returnIntent);
                 }
 
-                if(position == FIVE_BY_TEN){
+                if (position == FIVE_BY_TEN) {
                     returnIntent.putExtra(BOARD_SIZE, FIVE_BY_TEN);
                     setResult(Activity.RESULT_OK, returnIntent);
                 }
 
-                if(position == SIX_BY_FIFTEEN){
+                if (position == SIX_BY_FIFTEEN) {
                     returnIntent.putExtra(BOARD_SIZE, SIX_BY_FIFTEEN);
                     setResult(Activity.RESULT_OK, returnIntent);
                 }
@@ -123,13 +123,12 @@ public class Options extends AppCompatActivity {
         });
     }
 
+    private void setupMineNumberSpin() {
 
-    private void setupMineNumberSpin(){
+        mineNumSpin = (Spinner) findViewById(R.id.spin_MineNum);
 
-          mineNumSpin = (Spinner) findViewById(R.id.spin_MineNum);
-
-         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Options.this,
-                android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.Spin_Mine_Num));
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Options.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.Spin_Mine_Num));
 
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mineNumSpin.setAdapter(myAdapter);
@@ -138,26 +137,26 @@ public class Options extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                save(SAVE_MINE_NUMBER,GET_MINE_POSITION,position);
+                save(SAVE_MINE_NUMBER, GET_MINE_POSITION, position);
 
                 Intent returnIntent = new Intent();
 
-                if(position == SIX_MINES){
+                if (position == SIX_MINES) {
                     returnIntent.putExtra(MINE_NUMBER, SIX_MINES);
                     setResult(Activity.RESULT_OK, returnIntent);
                 }
 
-                if(position == TEN_MINES){
+                if (position == TEN_MINES) {
                     returnIntent.putExtra(MINE_NUMBER, TEN_MINES);
                     setResult(Activity.RESULT_OK, returnIntent);
                 }
 
-                if(position == FIFTEEN_MINES){
+                if (position == FIFTEEN_MINES) {
                     returnIntent.putExtra(MINE_NUMBER, FIFTEEN_MINES);
                     setResult(Activity.RESULT_OK, returnIntent);
                 }
 
-                if(position == TWENTY_MINES){
+                if (position == TWENTY_MINES) {
                     returnIntent.putExtra(MINE_NUMBER, TWENTY_MINES);
                     setResult(Activity.RESULT_OK, returnIntent);
                 }
@@ -171,20 +170,13 @@ public class Options extends AppCompatActivity {
         });
     }
 
-    private  void save(String file, String subFile,int position){
+    private void save(String file, String subFile, int position) {
         SharedPreferences sharedPref = getSharedPreferences(file, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putInt(subFile, position);
         editor.apply();
     }
-
-
-    public static Intent makeIntent(Context context){
-        return new Intent(context,Options.class);
-    }
-
-
 
 
 }

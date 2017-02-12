@@ -16,18 +16,13 @@ public class WelcomeScreen extends AppCompatActivity {
         setupMainMenuButton();
     }
 
-
-    private void setupMainMenuButton(){
+    private void setupMainMenuButton() {
         Button btn = (Button) findViewById(R.id.btn_MainMenu);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeScreen.this, MainMenu.class);
+                Intent intent = MainMenu.makeIntent(WelcomeScreen.this);
                 startActivity(intent);
-
             }
         });
     }
-
-
-
 }

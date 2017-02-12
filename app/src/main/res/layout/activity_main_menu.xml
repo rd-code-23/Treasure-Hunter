@@ -11,29 +11,29 @@
     tools:context="com.example.rdhol.mineseeker.MainMenu">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <Button
-            android:text="@string/Play_Game"
+            android:id="@+id/btn_PlayGame"
             android:layout_width="321dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_PlayGame" />
+            android:text="@string/Play_Game" />
 
         <Button
-            android:text="@string/Options"
+            android:id="@+id/btn_Options"
             android:layout_width="321dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_Options" />
+            android:text="@string/Options" />
 
         <Button
-            android:text="@string/Help"
+            android:id="@+id/btn_Help"
             android:layout_width="323dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_Help" />
+            android:text="@string/Help" />
     </LinearLayout>
 </RelativeLayout>

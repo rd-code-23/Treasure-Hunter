@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mine Seeker</string>
     <string name="By_Rishi">By Rishi Dholliwar</string>
-    <string name="By_Ali">Ali</string>
+    <string name="By_Ali">By Ali Maladwala</string>
     <string name="Main_Menu">Main Menu</string>
     <string name="Play_Game">Play Game!</string>
     <string name="Options">Options</string>
@@ -13,17 +13,18 @@
     <string-array name="Spin_Board_sizes">
         <item>4 x 6</item>
         <item>5 x 10</item>
-        <item>6 x 15</item> </string-array>
+        <item>6 x 15</item>
+    </string-array>
 
 
     <string-array name="Spin_Mine_Num">
         <item>6</item>
         <item>10</item>
         <item>15</item>
-        <item>20</item></string-array>
+        <item>20</item>
+    </string-array>
     <string name="Erase_times_played">Erase times played</string>
-
-
+    <string name="title_activity_play_game">PlayGameActivity</string>
 
 
 </resources>
