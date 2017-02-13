@@ -43,6 +43,7 @@ public class PlayGameActivity extends AppCompatActivity {
         numOfRows = 7;
         numOfCols = 5;
 
+
         gamecells = new GameCell[numOfRows][numOfCols];
         TableLayout cells = (TableLayout) findViewById(R.id.tableForGameCells);
         for (int row = 0; row < numOfRows; row++) {
@@ -119,6 +120,13 @@ public class PlayGameActivity extends AppCompatActivity {
 
         //TODO: move gameCell array to a gameBoard class
         //go through the gamecells and update UI of scan points
+        for (int row = 0; row < gamecells.length; row++) {
+            for (int col = 0; col < gamecells[row].length; col++) {
+                if (gamecells[row][col].isScanPoint()) {
+                    scanForTreasure(col, row);
+                }
+            }
+        }
 
 
     }

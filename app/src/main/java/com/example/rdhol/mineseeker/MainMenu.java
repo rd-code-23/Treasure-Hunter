@@ -71,19 +71,24 @@ public class MainMenu extends AppCompatActivity {
         switch (requestCode) {
             case OPTIONS_REQUEST:
                 int getBoardSize = data.getIntExtra(BOARD_SIZE, -1);
+                //TODO:save boardsize and other vars to shared prefs
+                SharedPreferences prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+
                 if (getBoardSize != -1)
                     Toast.makeText(getApplicationContext(), "you received board position " + getBoardSize, Toast.LENGTH_SHORT).show(); //just for testing to make sure we get right values
 
-                int getMineNumber = data.getIntExtra(MINE_NUMBER, -1);
-                if (getMineNumber != -1)
-                    Toast.makeText(getApplicationContext(), "you received Mine position " + getMineNumber, Toast.LENGTH_SHORT).show();
+                int getTreasureNumber = data.getIntExtra(MINE_NUMBER, -1);
+                if (getTreasureNumber != -1)
+                    Toast.makeText(getApplicationContext(), "you received Mine position " + getTreasureNumber, Toast.LENGTH_SHORT).show();
 
                 int getEraseTimesPlayed = data.getIntExtra(ERASE_TIMES_PLAYED, -1);
                 if (getEraseTimesPlayed != -1)
                     Toast.makeText(getApplicationContext(), "erase plays values: " + getEraseTimesPlayed, Toast.LENGTH_SHORT).show();
 
-                break;
 
+                editor.commit();
+                break;
             default:
                 break;
         }

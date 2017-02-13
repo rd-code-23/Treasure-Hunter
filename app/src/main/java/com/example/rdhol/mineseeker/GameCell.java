@@ -74,4 +74,8 @@ public class GameCell {
     public boolean hasHiddenTreasure() {
         return (hasTreasure && !treasureRevealed);
     }
+
+    public boolean isScanPoint() {
+        return isScanPoint;
+    }
 }
