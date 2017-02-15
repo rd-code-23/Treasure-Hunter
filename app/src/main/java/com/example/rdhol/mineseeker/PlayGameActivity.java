@@ -2,6 +2,7 @@ package com.example.rdhol.mineseeker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.security.InvalidParameterException;
 import java.util.Random;
@@ -42,7 +44,8 @@ public class PlayGameActivity extends AppCompatActivity {
 
         numOfRows = 7;
         numOfCols = 5;
-
+        numOfTreasuresFound = 0;
+        numOfScansUsed = 0;
 
         gamecells = new GameCell[numOfRows][numOfCols];
         TableLayout cells = (TableLayout) findViewById(R.id.tableForGameCells);
@@ -95,26 +98,45 @@ public class PlayGameActivity extends AppCompatActivity {
         updateUI();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //create save string here
+        outState.putString("", "");
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onRestoreInstanceState(savedInstanceState, persistentState);
+
+    }
+
     private void gameCellClicked(int col, int row) {
         lockButtonSizes();
-        final GameCell gameCell = gamecells[row][col];
-        boolean treasureFound = gameCell.scanForTreasure(this);
+        final GameCell gameCellClicked = gamecells[row][col];
+
+        //scanForTreasure has a side effect of turning the gamecell
+        // into a scanpoint if there is no treasure
+        boolean isScanPoint = gameCellClicked.isScanPoint();
+        boolean treasureFound = gameCellClicked.scanForTreasure(this);
         if (treasureFound) {
             numOfTreasuresFound++;
-            //Toast.makeText(this, "Treasure Found", Toast.LENGTH_SHORT).show();
-        } else {
-            //TODO: CHANGE SCAN NUMBER TO CHANGE AUTOMATICALLY
-            //TODO: Dont increment scanCount if the gameCell has a scan number on it
-            scanForTreasure(col, row);
+            Toast.makeText(this, "Treasure Found", Toast.LENGTH_SHORT).show();
+        } else if (!isScanPoint) {
             numOfScansUsed++;
-            // Toast.makeText(this, "Scanning", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Is a scanpoint no need to increment" +
+                    numOfScansUsed, Toast.LENGTH_SHORT).show();
+
         }
         updateUI();
     }
 
     private void updateUI() {
         TextView txtNumOfTreasuresFound = (TextView) findViewById(R.id.txtNumOfTreasuresFound);
-        txtNumOfTreasuresFound.setText(numOfTreasuresFound + " of " + numOfTreasures + " treasures found");
+        txtNumOfTreasuresFound.setText(numOfTreasuresFound + " of " +
+                numOfTreasures + " treasures found");
         TextView txtNumOfScansUsed = (TextView) findViewById(R.id.txtNumOfScansUsed);
         txtNumOfScansUsed.setText(numOfScansUsed + " Scans used");
 
@@ -123,15 +145,14 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int row = 0; row < gamecells.length; row++) {
             for (int col = 0; col < gamecells[row].length; col++) {
                 if (gamecells[row][col].isScanPoint()) {
-                    scanForTreasure(col, row);
+                    scanRowAndCol(col, row);
                 }
             }
         }
 
-
     }
 
-    private void scanForTreasure(int col, int row) {
+    private void scanRowAndCol(int col, int row) {
         int numOfTreasureFoundInScan = 0;
         for (int i = 0; i < row; i++) {
             if (gamecells[i][col].hasHiddenTreasure()) {

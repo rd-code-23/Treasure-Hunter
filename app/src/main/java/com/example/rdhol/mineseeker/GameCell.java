@@ -23,7 +23,7 @@ public class GameCell {
         this.button = button;
         this.hasTreasure = hasTreasure;
         this.treasureRevealed = false;
-        this.isScanPoint= false;
+        this.isScanPoint = false;
     }
 
     public void lockButtonSize() {
