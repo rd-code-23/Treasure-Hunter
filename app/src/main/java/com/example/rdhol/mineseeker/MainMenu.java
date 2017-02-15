@@ -63,6 +63,7 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = Options.makeIntent(MainMenu.this);
                 startActivityForResult(intent, OPTIONS_REQUEST);
+
             }
         });
     }
