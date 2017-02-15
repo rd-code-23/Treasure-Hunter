@@ -10,9 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import static android.R.attr.data;
 import static com.example.rdhol.mineseeker.Options.BOARD_SIZE;
 import static com.example.rdhol.mineseeker.Options.ERASE_TIMES_PLAYED;
+import static com.example.rdhol.mineseeker.Options.GET_MINE_POSITION;
 import static com.example.rdhol.mineseeker.Options.MINE_NUMBER;
+import static com.example.rdhol.mineseeker.Options.SAVE_BOARD_SIZE;
+import static com.example.rdhol.mineseeker.Options.SAVE_MINE_NUMBER;
 
 public class MainMenu extends AppCompatActivity {
     public static final int OPTIONS_REQUEST = 1;
@@ -29,6 +33,7 @@ public class MainMenu extends AppCompatActivity {
         setupOptionsButton();
         setupHelpButton();
         setupPlayGameButton();
+
     }
 
     private void setupPlayGameButton() {

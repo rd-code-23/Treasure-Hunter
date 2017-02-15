@@ -2,6 +2,7 @@ package com.example.rdhol.mineseeker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,11 @@ import android.widget.TextView;
 
 import java.security.InvalidParameterException;
 import java.util.Random;
+
+import static com.example.rdhol.mineseeker.Options.GET_BOARD_POSITION;
+import static com.example.rdhol.mineseeker.Options.GET_MINE_POSITION;
+import static com.example.rdhol.mineseeker.Options.SAVE_BOARD_SIZE;
+import static com.example.rdhol.mineseeker.Options.SAVE_MINE_NUMBER;
 
 public class PlayGameActivity extends AppCompatActivity {
 
@@ -30,8 +36,11 @@ public class PlayGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
-
+        loadNumOfMines();
+        loadBoardRow();
+        loadBoardCol();
         setupGameCells();
+
     }
 
     private void setupGameCells() {
@@ -40,8 +49,8 @@ public class PlayGameActivity extends AppCompatActivity {
         //TODO: MOVE code into a separate class, this method is way to large
         //TODO: HANDLE saving  on exit
 
-        numOfRows = 7;
-        numOfCols = 5;
+        numOfRows = loadBoardRow();
+        numOfCols = loadBoardCol();
 
 
         gamecells = new GameCell[numOfRows][numOfCols];
@@ -76,7 +85,7 @@ public class PlayGameActivity extends AppCompatActivity {
             }
         }
         //randomly place treasure
-        numOfTreasures = 5;
+        numOfTreasures = loadNumOfMines();
         if (numOfTreasures > (numOfRows * numOfCols)) {
             throw new InvalidParameterException();
         }
@@ -166,6 +175,66 @@ public class PlayGameActivity extends AppCompatActivity {
                 gamecells[row][col].lockButtonSize();
             }
         }
+    }
+    private int loadNumOfMines(){
+        int numOfTreasure = 0;
+        SharedPreferences sharedPref = getSharedPreferences(SAVE_BOARD_SIZE, Context.MODE_PRIVATE);
+        sharedPref = getSharedPreferences(SAVE_MINE_NUMBER, Context.MODE_PRIVATE);
+        int mineSpinVal = sharedPref.getInt(GET_MINE_POSITION, -1);
+        switch(mineSpinVal){
+            case 0:
+                numOfTreasure = 6;
+                break;
+            case 1:
+                numOfTreasure = 10;
+                break;
+            case 2:
+                numOfTreasure = 15;
+                break;
+            case 3:
+                numOfTreasure = 20;
+                break;
+        }
+        return numOfTreasure;
+    }
+
+    private int loadBoardRow() {
+        int numOfRows = 0;
+        SharedPreferences sharedPref = getSharedPreferences(SAVE_BOARD_SIZE, Context.MODE_PRIVATE);
+        int boardSpinVal = sharedPref.getInt(GET_BOARD_POSITION, -1);
+        switch (boardSpinVal) {
+            case 0:
+                numOfRows = 4;
+                break;
+            case 1:
+                numOfRows = 5;
+                break;
+            case 2:
+                numOfRows = 6;
+                break;
+
+        }
+        return numOfRows;
+    }
+
+
+    private int loadBoardCol(){
+        int numOfCols = 0;
+        SharedPreferences sharedPref = getSharedPreferences(SAVE_BOARD_SIZE, Context.MODE_PRIVATE);
+        int boardSpinVal = sharedPref.getInt(GET_BOARD_POSITION, -1);
+        switch (boardSpinVal) {
+            case 0:
+                numOfCols = 6;
+                break;
+            case 1:
+                numOfCols = 10;
+                break;
+            case 2:
+                numOfCols = 15;
+                break;
+
+        }
+        return numOfCols;
     }
 }
 
