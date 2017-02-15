@@ -10,13 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import static android.R.attr.data;
-import static com.example.rdhol.mineseeker.Options.BOARD_SIZE;
+//import static com.example.rdhol.mineseeker.Options.BOARD_SIZE_KEY;
 import static com.example.rdhol.mineseeker.Options.ERASE_TIMES_PLAYED;
-import static com.example.rdhol.mineseeker.Options.GET_MINE_POSITION;
-import static com.example.rdhol.mineseeker.Options.MINE_NUMBER;
-import static com.example.rdhol.mineseeker.Options.SAVE_BOARD_SIZE;
-import static com.example.rdhol.mineseeker.Options.SAVE_MINE_NUMBER;
+import static com.example.rdhol.mineseeker.Options.MINE_NUM_KEY;
+//import static com.example.rdhol.mineseeker.Options.MINE_NUMBER;
+//import static com.example.rdhol.mineseeker.Options.SAVE_BOARD_SIZE;
+//import static com.example.rdhol.mineseeker.Options.SAVE_MINE_NUMBER;
 
 public class MainMenu extends AppCompatActivity {
     public static final int OPTIONS_REQUEST = 1;
@@ -76,15 +75,17 @@ public class MainMenu extends AppCompatActivity {
         }
         switch (requestCode) {
             case OPTIONS_REQUEST:
-                int getBoardSize = data.getIntExtra(BOARD_SIZE, -1);
-                //TODO:save boardsize and other vars to shared prefs
-                SharedPreferences prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
+                int getBoardSize = data.getIntExtra(Options.BOARD_SIZE_OPTION_KEY,
+                        Options.DEFAULT_BOARD_SIZE);
+                //TODO: UNNEEDED CODE, REMOVE AFTER TESTING
+                //SharedPreferences prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                //SharedPreferences.Editor editor = prefs.edit();
 
                 if (getBoardSize != -1)
-                    Toast.makeText(getApplicationContext(), "you received board position " + getBoardSize, Toast.LENGTH_SHORT).show(); //just for testing to make sure we get right values
+                    Toast.makeText(getApplicationContext(), "you received board position "
+                            + getBoardSize, Toast.LENGTH_SHORT).show(); //just for testing to make sure we get right values
 
-                int getTreasureNumber = data.getIntExtra(MINE_NUMBER, -1);
+                int getTreasureNumber = data.getIntExtra(MINE_NUM_KEY, Options.DEFAULT_MINE_NUM);
                 if (getTreasureNumber != -1)
                     Toast.makeText(getApplicationContext(), "you received Mine position " + getTreasureNumber, Toast.LENGTH_SHORT).show();
 
@@ -93,7 +94,7 @@ public class MainMenu extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "erase plays values: " + getEraseTimesPlayed, Toast.LENGTH_SHORT).show();
 
 
-                editor.commit();
+               // editor.commit();
                 break;
             default:
                 break;

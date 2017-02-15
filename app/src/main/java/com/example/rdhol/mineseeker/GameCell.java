@@ -1,6 +1,5 @@
 package com.example.rdhol.mineseeker;
 
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;

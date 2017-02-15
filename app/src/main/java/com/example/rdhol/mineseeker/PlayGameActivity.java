@@ -16,10 +16,9 @@ import android.widget.Toast;
 import java.security.InvalidParameterException;
 import java.util.Random;
 
-import static com.example.rdhol.mineseeker.Options.GET_BOARD_POSITION;
-import static com.example.rdhol.mineseeker.Options.GET_MINE_POSITION;
-import static com.example.rdhol.mineseeker.Options.SAVE_BOARD_SIZE;
-import static com.example.rdhol.mineseeker.Options.SAVE_MINE_NUMBER;
+import static com.example.rdhol.mineseeker.Options.BOARD_SIZE_OPTION_KEY;
+import static com.example.rdhol.mineseeker.Options.MINE_NUM_KEY;
+import static com.example.rdhol.mineseeker.Options.OPTIONS_PREFS_KEY;
 
 public class PlayGameActivity extends AppCompatActivity {
 
@@ -42,12 +41,11 @@ public class PlayGameActivity extends AppCompatActivity {
         loadBoardRow();
         loadBoardCol();
         setupGameCells();
-
     }
 
     private void setupGameCells() {
 
-        //TODO: GET THE USERS SELECTED BOARD SIZE from options menu, treasure count
+        //TODO: Add error handling for loading/saving
         //TODO: MOVE code into a separate class, this method is way to large
         //TODO: HANDLE saving  on exit
 
@@ -57,7 +55,6 @@ public class PlayGameActivity extends AppCompatActivity {
         numOfScansUsed = 0;
         numOfRows = loadBoardRow();
         numOfCols = loadBoardCol();
-
 
         gamecells = new GameCell[numOfRows][numOfCols];
         TableLayout cells = (TableLayout) findViewById(R.id.tableForGameCells);
@@ -104,16 +101,12 @@ public class PlayGameActivity extends AppCompatActivity {
                 i--;
             }
         }
-
-        numOfTreasuresFound = 0;
-        numOfScansUsed = 0;
         updateUI();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         //create save string here
         outState.putString("", "");
     }
@@ -121,7 +114,6 @@ public class PlayGameActivity extends AppCompatActivity {
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onRestoreInstanceState(savedInstanceState, persistentState);
-
     }
 
     private void gameCellClicked(int col, int row) {
@@ -137,12 +129,16 @@ public class PlayGameActivity extends AppCompatActivity {
             Toast.makeText(this, "Treasure Found", Toast.LENGTH_SHORT).show();
         } else if (!isScanPoint) {
             numOfScansUsed++;
-        } else {
-            Toast.makeText(this, "Is a scanpoint no need to increment" +
-                    numOfScansUsed, Toast.LENGTH_SHORT).show();
-
         }
         updateUI();
+        if (numOfTreasuresFound >= numOfTreasures) {
+            winGame();
+        }
+    }
+
+    private void winGame() {
+        //display popup,save stuff and destroy playGameActivity on exit
+        Toast.makeText(this, "YOU WIN!", Toast.LENGTH_SHORT).show();
     }
 
     private void updateUI() {
@@ -161,7 +157,6 @@ public class PlayGameActivity extends AppCompatActivity {
                 }
             }
         }
-
     }
 
     private void scanRowAndCol(int col, int row) {
@@ -200,66 +195,71 @@ public class PlayGameActivity extends AppCompatActivity {
             }
         }
     }
-    private int loadNumOfMines(){
+
+    private int loadNumOfMines() {
         int numOfTreasure = 0;
-        SharedPreferences sharedPref = getSharedPreferences(SAVE_BOARD_SIZE, Context.MODE_PRIVATE);
-        sharedPref = getSharedPreferences(SAVE_MINE_NUMBER, Context.MODE_PRIVATE);
-        int mineSpinVal = sharedPref.getInt(GET_MINE_POSITION, -1);
-        switch(mineSpinVal){
-            case 0:
+        SharedPreferences sharedPref;
+        sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
+        int mineSpinVal = sharedPref.getInt(MINE_NUM_KEY, -1);
+        switch (mineSpinVal) {
+            case Options.SIX_MINES:
                 numOfTreasure = 6;
                 break;
-            case 1:
+            case Options.TEN_MINES:
                 numOfTreasure = 10;
                 break;
-            case 2:
+            case Options.FIFTEEN_MINES:
                 numOfTreasure = 15;
                 break;
-            case 3:
+            case Options.TWENTY_MINES:
                 numOfTreasure = 20;
+                break;
+            default:
+                numOfTreasure = 6;
                 break;
         }
         return numOfTreasure;
     }
 
     private int loadBoardRow() {
-        int numOfRows = 0;
-        SharedPreferences sharedPref = getSharedPreferences(SAVE_BOARD_SIZE, Context.MODE_PRIVATE);
-        int boardSpinVal = sharedPref.getInt(GET_BOARD_POSITION, -1);
+        int numOfRows;
+        SharedPreferences sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
+        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, -1);
         switch (boardSpinVal) {
-            case 0:
+            case Options.FOUR_BY_SIX:
                 numOfRows = 4;
                 break;
-            case 1:
+            case Options.FIVE_BY_TEN:
                 numOfRows = 5;
                 break;
-            case 2:
+            case Options.SIX_BY_FIFTEEN:
                 numOfRows = 6;
                 break;
-
+            default:
+                numOfRows = 4;
+                break;
         }
         return numOfRows;
     }
 
-
-    private int loadBoardCol(){
-        int numOfCols = 0;
-        SharedPreferences sharedPref = getSharedPreferences(SAVE_BOARD_SIZE, Context.MODE_PRIVATE);
-        int boardSpinVal = sharedPref.getInt(GET_BOARD_POSITION, -1);
+    private int loadBoardCol() {
+        int numOfCols;
+        SharedPreferences sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
+        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, -1);
         switch (boardSpinVal) {
-            case 0:
+            case Options.FOUR_BY_SIX:
                 numOfCols = 6;
                 break;
-            case 1:
+            case Options.FIVE_BY_TEN:
                 numOfCols = 10;
                 break;
-            case 2:
+            case Options.SIX_BY_FIFTEEN:
                 numOfCols = 15;
                 break;
-
+            default:
+                numOfCols = 6;
+                break;
         }
         return numOfCols;
     }
 }
-
-
