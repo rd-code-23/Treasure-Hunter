@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.rdhol.mineseeker.WelcomeScreen">
+    tools:context="com.example.rdhol.mineseeker.WelcomeScreen"
+    >
 
     <TextView
         android:id="@+id/textView2"
@@ -35,41 +36,54 @@
         android:id="@+id/btn_MainMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:text="@string/Main_Menu" />
+        android:text="@string/Main_Menu"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="42dp"
+        android:layout_marginEnd="42dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textStyle="normal|bold|italic"
+        android:textSize="30sp"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:layout_marginTop="41dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/app_name" />
+        android:layout_toLeftOf="@+id/btn_MainMenu"
+        android:layout_toStartOf="@+id/btn_MainMenu"
+        android:layout_marginRight="38dp"
+        android:layout_marginEnd="38dp"
+        android:textColor="#F00"/>
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="31dp"
-        android:layout_marginStart="31dp"
-        android:layout_toEndOf="@+id/btn_MainMenu"
-        android:layout_toRightOf="@+id/btn_MainMenu"
+        android:id="@+id/image_DiamondLeft"
         android:contentDescription="@string/a_red_gem"
-        app:srcCompat="@drawable/diamond256" />
+        app:srcCompat="@drawable/diamond256"
+        android:layout_weight="1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_alignTop="@+id/tittle"
+        android:layout_toLeftOf="@+id/tittle"
+        android:layout_toStartOf="@+id/tittle" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_toLeftOf="@+id/textView"
-        android:layout_toStartOf="@+id/textView"
+        android:id="@+id/image_DiamondRight"
         android:contentDescription="@string/a_red_gem"
-        app:srcCompat="@drawable/diamond256" />
+        app:srcCompat="@drawable/diamond256"
+        android:layout_weight="1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="57dp"
+        android:layout_marginEnd="57dp"
+        android:layout_alignTop="@+id/tittle"
+        android:layout_alignRight="@+id/btn_MainMenu"
+        android:layout_alignEnd="@+id/btn_MainMenu" />
 
 </RelativeLayout>
