@@ -23,9 +23,10 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="75dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Board_size" />
+            android:text="@string/Board_size"
+            android:textSize="35sp" />
 
         <Spinner
             android:id="@+id/spin_BoardSize"
@@ -59,7 +60,8 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Num_Mines" />
+            android:text="@string/Num_Mines"
+            android:textSize="35sp" />
 
         <Spinner
             android:id="@+id/spin_MineNum"

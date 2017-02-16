@@ -14,7 +14,7 @@ public class GameCell {
     private boolean treasureRevealed;
     private boolean isScanPoint;
 
-    GameCell(Button button) {
+    public GameCell(Button button) {
         this(button, false);
     }
 

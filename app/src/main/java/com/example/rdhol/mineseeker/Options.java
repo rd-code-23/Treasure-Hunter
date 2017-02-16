@@ -77,7 +77,6 @@ public class Options extends AppCompatActivity {
     }
 
     private void setupBoardSizeSpin() {
-
         boardSizeSpin = (Spinner) findViewById(R.id.spin_BoardSize);
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(Options.this,
                 android.R.layout.simple_list_item_1,
@@ -87,20 +86,23 @@ public class Options extends AppCompatActivity {
         boardSizeSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 save(OPTIONS_PREFS_KEY, BOARD_SIZE_OPTION_KEY, position);
                 Intent returnIntent = new Intent();
-                if (position == FOUR_BY_SIX) {
-                    returnIntent.putExtra(BOARD_SIZE_OPTION_KEY, FOUR_BY_SIX);
-                    setResult(Activity.RESULT_OK, returnIntent);
-                } else if (position == FIVE_BY_TEN) {
-                    returnIntent.putExtra(BOARD_SIZE_OPTION_KEY, FIVE_BY_TEN);
-                    setResult(Activity.RESULT_OK, returnIntent);
-                } else if (position == SIX_BY_FIFTEEN) {
-                    returnIntent.putExtra(BOARD_SIZE_OPTION_KEY, SIX_BY_FIFTEEN);
-                    setResult(Activity.RESULT_OK, returnIntent);
-                } else {
-                    throw new InvalidParameterException();
+                switch (position) {
+                    case FOUR_BY_SIX:
+                        returnIntent.putExtra(BOARD_SIZE_OPTION_KEY, FOUR_BY_SIX);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        break;
+                    case FIVE_BY_TEN:
+                        returnIntent.putExtra(BOARD_SIZE_OPTION_KEY, FIVE_BY_TEN);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        break;
+                    case SIX_BY_FIFTEEN:
+                        returnIntent.putExtra(BOARD_SIZE_OPTION_KEY, SIX_BY_FIFTEEN);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        break;
+                    default:
+                        throw new InvalidParameterException();
                 }
             }
 
@@ -111,36 +113,36 @@ public class Options extends AppCompatActivity {
     }
 
     private void setupMineNumberSpin() {
-
         mineNumSpin = (Spinner) findViewById(R.id.spin_MineNum);
-
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(Options.this,
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.Spin_Mine_Num));
-
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mineNumSpin.setAdapter(myAdapter);
-
         mineNumSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 save(OPTIONS_PREFS_KEY, MINE_NUM_KEY, position);
                 Intent returnIntent = new Intent();
-                if (position == SIX_MINES) {
-                    returnIntent.putExtra(MINE_NUM_KEY, SIX_MINES);
-                    setResult(Activity.RESULT_OK, returnIntent);
-                } else if (position == TEN_MINES) {
-                    returnIntent.putExtra(MINE_NUM_KEY, TEN_MINES);
-                    setResult(Activity.RESULT_OK, returnIntent);
-                } else if (position == FIFTEEN_MINES) {
-                    returnIntent.putExtra(MINE_NUM_KEY, FIFTEEN_MINES);
-                    setResult(Activity.RESULT_OK, returnIntent);
-                } else if (position == TWENTY_MINES) {
-                    returnIntent.putExtra(MINE_NUM_KEY, TWENTY_MINES);
-                    setResult(Activity.RESULT_OK, returnIntent);
-                } else {
-                    throw new InvalidParameterException();
+                switch (position) {
+                    case SIX_MINES:
+                        returnIntent.putExtra(MINE_NUM_KEY, SIX_MINES);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        break;
+                    case TEN_MINES:
+                        returnIntent.putExtra(MINE_NUM_KEY, TEN_MINES);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        break;
+                    case FIFTEEN_MINES:
+                        returnIntent.putExtra(MINE_NUM_KEY, FIFTEEN_MINES);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        break;
+                    case TWENTY_MINES:
+                        returnIntent.putExtra(MINE_NUM_KEY, TWENTY_MINES);
+                        setResult(Activity.RESULT_OK, returnIntent);
+                        break;
+                    default:
+                        throw new InvalidParameterException();
                 }
             }
 

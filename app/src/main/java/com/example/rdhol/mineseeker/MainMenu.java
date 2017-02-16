@@ -3,19 +3,15 @@ package com.example.rdhol.mineseeker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-//import static com.example.rdhol.mineseeker.Options.BOARD_SIZE_KEY;
 import static com.example.rdhol.mineseeker.Options.ERASE_TIMES_PLAYED;
 import static com.example.rdhol.mineseeker.Options.MINE_NUM_KEY;
-//import static com.example.rdhol.mineseeker.Options.MINE_NUMBER;
-//import static com.example.rdhol.mineseeker.Options.SAVE_BOARD_SIZE;
-//import static com.example.rdhol.mineseeker.Options.SAVE_MINE_NUMBER;
 
 public class MainMenu extends AppCompatActivity {
     public static final int OPTIONS_REQUEST = 1;
@@ -32,7 +28,6 @@ public class MainMenu extends AppCompatActivity {
         setupOptionsButton();
         setupHelpButton();
         setupPlayGameButton();
-
     }
 
     private void setupPlayGameButton() {
@@ -43,7 +38,6 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void setupHelpButton() {
@@ -62,7 +56,6 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = Options.makeIntent(MainMenu.this);
                 startActivityForResult(intent, OPTIONS_REQUEST);
-
             }
         });
     }
@@ -78,8 +71,6 @@ public class MainMenu extends AppCompatActivity {
                 int getBoardSize = data.getIntExtra(Options.BOARD_SIZE_OPTION_KEY,
                         Options.DEFAULT_BOARD_SIZE);
                 //TODO: UNNEEDED CODE, REMOVE AFTER TESTING
-                //SharedPreferences prefs = this.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                //SharedPreferences.Editor editor = prefs.edit();
 
                 if (getBoardSize != -1)
                     Toast.makeText(getApplicationContext(), "you received board position "
@@ -92,14 +83,9 @@ public class MainMenu extends AppCompatActivity {
                 int getEraseTimesPlayed = data.getIntExtra(ERASE_TIMES_PLAYED, -1);
                 if (getEraseTimesPlayed != -1)
                     Toast.makeText(getApplicationContext(), "erase plays values: " + getEraseTimesPlayed, Toast.LENGTH_SHORT).show();
-
-
-               // editor.commit();
                 break;
             default:
                 break;
         }
-
     }
-
 }

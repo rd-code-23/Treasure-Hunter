@@ -24,7 +24,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
     int numOfCols;
     int numOfRows;
-    private GameCell[][] gamecells;
+    private GameCell[][] gameCells;
     private int numOfTreasures;
     private int numOfScansUsed;
     private int numOfTreasuresFound;
@@ -49,14 +49,12 @@ public class PlayGameActivity extends AppCompatActivity {
         //TODO: MOVE code into a separate class, this method is way to large
         //TODO: HANDLE saving  on exit
 
-        numOfRows = 7;
-        numOfCols = 5;
         numOfTreasuresFound = 0;
         numOfScansUsed = 0;
         numOfRows = loadBoardRow();
         numOfCols = loadBoardCol();
 
-        gamecells = new GameCell[numOfRows][numOfCols];
+        gameCells = new GameCell[numOfRows][numOfCols];
         TableLayout cells = (TableLayout) findViewById(R.id.tableForGameCells);
         for (int row = 0; row < numOfRows; row++) {
             TableRow tableRow = new TableRow(this);
@@ -83,7 +81,7 @@ public class PlayGameActivity extends AppCompatActivity {
                         gameCellClicked(finalCol, finalRow);
                     }
                 });
-                gamecells[row][col] = new GameCell(button);
+                gameCells[row][col] = new GameCell(button);
                 tableRow.addView(button);
             }
         }
@@ -97,7 +95,7 @@ public class PlayGameActivity extends AppCompatActivity {
             int rand1 = rand.nextInt(numOfRows);
             int rand2 = rand.nextInt(numOfCols);
             //if we try to add a treasure to a cell that is full, decrement to ensure correctness
-            if (!gamecells[rand1][rand2].tryGiveTreasure()) {
+            if (!gameCells[rand1][rand2].tryGiveTreasure()) {
                 i--;
             }
         }
@@ -118,7 +116,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
     private void gameCellClicked(int col, int row) {
         lockButtonSizes();
-        final GameCell gameCellClicked = gamecells[row][col];
+        final GameCell gameCellClicked = gameCells[row][col];
 
         //scanForTreasure has a side effect of turning the gamecell
         // into a scanpoint if there is no treasure
@@ -149,10 +147,10 @@ public class PlayGameActivity extends AppCompatActivity {
         txtNumOfScansUsed.setText(numOfScansUsed + " Scans used");
 
         //TODO: move gameCell array to a gameBoard class
-        //go through the gamecells and update UI of scan points
-        for (int row = 0; row < gamecells.length; row++) {
-            for (int col = 0; col < gamecells[row].length; col++) {
-                if (gamecells[row][col].isScanPoint()) {
+        //go through the gameCells and update UI of scan points
+        for (int row = 0; row < gameCells.length; row++) {
+            for (int col = 0; col < gameCells[row].length; col++) {
+                if (gameCells[row][col].isScanPoint()) {
                     scanRowAndCol(col, row);
                 }
             }
@@ -162,45 +160,43 @@ public class PlayGameActivity extends AppCompatActivity {
     private void scanRowAndCol(int col, int row) {
         int numOfTreasureFoundInScan = 0;
         for (int i = 0; i < row; i++) {
-            if (gamecells[i][col].hasHiddenTreasure()) {
+            if (gameCells[i][col].hasHiddenTreasure()) {
                 numOfTreasureFoundInScan++;
             }
         }
         for (int i = row; i < numOfRows; i++) {
-            if (gamecells[i][col].hasHiddenTreasure()) {
+            if (gameCells[i][col].hasHiddenTreasure()) {
                 numOfTreasureFoundInScan++;
             }
         }
 
         for (int i = 0; i < col; i++) {
-            if (gamecells[row][i].hasHiddenTreasure()) {
+            if (gameCells[row][i].hasHiddenTreasure()) {
                 numOfTreasureFoundInScan++;
             }
         }
         for (int i = row; i < numOfCols; i++) {
-            if (gamecells[row][i].hasHiddenTreasure()) {
+            if (gameCells[row][i].hasHiddenTreasure()) {
                 numOfTreasureFoundInScan++;
             }
         }
-        gamecells[row][col].displayText("" + numOfTreasureFoundInScan);
-        // Toast.makeText(this, numOfTreasureFoundInScan + "", Toast.LENGTH_SHORT).show();
-
+        gameCells[row][col].displayText("" + numOfTreasureFoundInScan);
     }
 
     private void lockButtonSizes() {
         //lock button sizes
         for (int row = 0; row < numOfRows; row++) {
             for (int col = 0; col < numOfCols; col++) {
-                gamecells[row][col].lockButtonSize();
+                gameCells[row][col].lockButtonSize();
             }
         }
     }
 
     private int loadNumOfMines() {
-        int numOfTreasure = 0;
+        int numOfTreasure;
         SharedPreferences sharedPref;
         sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
-        int mineSpinVal = sharedPref.getInt(MINE_NUM_KEY, -1);
+        int mineSpinVal = sharedPref.getInt(MINE_NUM_KEY, Options.SIX_MINES);
         switch (mineSpinVal) {
             case Options.SIX_MINES:
                 numOfTreasure = 6;
@@ -224,7 +220,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private int loadBoardRow() {
         int numOfRows;
         SharedPreferences sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
-        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, -1);
+        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, Options.FOUR_BY_SIX);
         switch (boardSpinVal) {
             case Options.FOUR_BY_SIX:
                 numOfRows = 4;
@@ -245,7 +241,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private int loadBoardCol() {
         int numOfCols;
         SharedPreferences sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
-        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, -1);
+        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, Options.FOUR_BY_SIX);
         switch (boardSpinVal) {
             case Options.FOUR_BY_SIX:
                 numOfCols = 6;

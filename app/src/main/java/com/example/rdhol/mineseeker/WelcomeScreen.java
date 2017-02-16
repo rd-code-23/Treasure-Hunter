@@ -19,7 +19,6 @@ public class WelcomeScreen extends AppCompatActivity {
         setupDiamondLeftAnim();
         setupDiamondRightAnim();
         setupMainMenuButton();
-
     }
 
     private void setupMainMenuButton() {
@@ -32,15 +31,15 @@ public class WelcomeScreen extends AppCompatActivity {
         });
     }
 
-    private void setupDiamondLeftAnim(){
+    private void setupDiamondLeftAnim() {
         ImageView diamond = (ImageView) findViewById(R.id.image_DiamondLeft);
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
         diamond.startAnimation(animation);
     }
 
-    private void setupDiamondRightAnim(){
+    private void setupDiamondRightAnim() {
         ImageView diamond = (ImageView) findViewById(R.id.image_DiamondRight);
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
         diamond.startAnimation(animation);
     }
 }
