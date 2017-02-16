@@ -32,6 +32,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private int numOfTreasures;
     private int numOfScansUsed;
     private int numOfTreasuresFound;
+    private Vibrator vibrator;
 
     public static Intent makeIntent(Context context) {
         return new Intent(context, PlayGameActivity.class);
@@ -45,6 +46,7 @@ public class PlayGameActivity extends AppCompatActivity {
         loadBoardRow();
         loadBoardCol();
         setupGameCells();
+        vibrator = (Vibrator) this.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     private void setupGameCells() {
@@ -129,12 +131,12 @@ public class PlayGameActivity extends AppCompatActivity {
         if (treasureFound) {
             numOfTreasuresFound++;
             playTreasureFoundSound();
-            // vibrate(100);
+            vibrate(300);
         } else if (!isScanPoint) {
             numOfScansUsed++;
-             playScanAnimation(col, row);
-             playScanSound();
-            // vibrate(500);
+            playScanAnimation(col, row);
+            playScanSound();
+            vibrate(50);
         }
         updateUI();
         if (numOfTreasuresFound >= numOfTreasures) {
@@ -143,9 +145,9 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void vibrate(int durationInMilliseconds) {
-        Vibrator vibrator =
-                (Vibrator) this.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(durationInMilliseconds);
+        if (vibrator != null && vibrator.hasVibrator()) {
+            vibrator.vibrate(durationInMilliseconds);
+        }
     }
 
     private void playTreasureFoundSound() {
