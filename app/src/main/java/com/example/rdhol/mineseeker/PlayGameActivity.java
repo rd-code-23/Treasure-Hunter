@@ -128,12 +128,12 @@ public class PlayGameActivity extends AppCompatActivity {
         boolean treasureFound = gameCellClicked.scanForTreasure(this);
         if (treasureFound) {
             numOfTreasuresFound++;
-            // playTreasureFoundSound();
+            playTreasureFoundSound();
             // vibrate(100);
         } else if (!isScanPoint) {
             numOfScansUsed++;
              playScanAnimation(col, row);
-            // playScanSound();
+             playScanSound();
             // vibrate(500);
         }
         updateUI();
@@ -151,13 +151,11 @@ public class PlayGameActivity extends AppCompatActivity {
     private void playTreasureFoundSound() {
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.treasure_found);
         mediaPlayer.start();
-        mediaPlayer.release();
     }
 
     private void playScanSound() {
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.scan);
         mediaPlayer.start();
-        mediaPlayer.release();
     }
 
     private void playScanAnimation(int colOfStartingCell, int rowOfStartingCell) {

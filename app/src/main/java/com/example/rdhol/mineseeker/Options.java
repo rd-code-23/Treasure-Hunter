@@ -109,7 +109,6 @@ public class Options extends AppCompatActivity {
                         throw new InvalidParameterException();
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
