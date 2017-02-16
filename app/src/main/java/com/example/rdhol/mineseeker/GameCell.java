@@ -59,6 +59,17 @@ public class GameCell {
         button.setBackground(new BitmapDrawable(resources, scaledBitmap));
     }
 
+    public void displayRockImage(Context context) {
+
+        Resources resources = context.getResources();
+        Bitmap origBitmap = BitmapFactory.decodeResource(resources,
+                R.drawable.rock);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(origBitmap,
+                button.getWidth(), button.getHeight(), true);
+        button.setBackground(new BitmapDrawable(resources, scaledBitmap));
+
+    }
+
     public void displayText(String test) {
         button.setText(test);
     }
@@ -87,4 +98,5 @@ public class GameCell {
         this.button.startAnimation(anim);
 
     }
+
 }

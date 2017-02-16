@@ -3,11 +3,9 @@ package com.example.rdhol.mineseeker;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.os.PersistableBundle;
 import android.os.Vibrator;
-import android.renderscript.RSInvalidStateException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -87,7 +85,10 @@ public class PlayGameActivity extends AppCompatActivity {
                         gameCellClicked(finalCol, finalRow);
                     }
                 });
-                gameCells[row][col] = new GameCell(button);
+
+
+                GameCell gameCell = new GameCell(button);
+                gameCells[row][col] = gameCell;
                 tableRow.addView(button);
             }
         }
@@ -107,6 +108,8 @@ public class PlayGameActivity extends AppCompatActivity {
         }
         updateUI();
     }
+
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -200,13 +203,14 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int row = 0; row < gameCells.length; row++) {
             for (int col = 0; col < gameCells[row].length; col++) {
                 if (gameCells[row][col].isScanPoint()) {
-                    scanRowAndCol(col, row);
+                    updateScanPoints(col, row);
                 }
+
             }
         }
     }
 
-    private void scanRowAndCol(int col, int row) {
+    private void updateScanPoints(int col, int row) {
         int numOfTreasureFoundInScan = 0;
         for (int i = 0; i < row; i++) {
             if (gameCells[i][col].hasHiddenTreasure()) {
