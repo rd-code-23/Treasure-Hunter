@@ -3,7 +3,11 @@ package com.example.rdhol.mineseeker;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.os.PersistableBundle;
+import android.os.Vibrator;
+import android.renderscript.RSInvalidStateException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -124,14 +128,59 @@ public class PlayGameActivity extends AppCompatActivity {
         boolean treasureFound = gameCellClicked.scanForTreasure(this);
         if (treasureFound) {
             numOfTreasuresFound++;
-            Toast.makeText(this, "Treasure Found", Toast.LENGTH_SHORT).show();
+            // playTreasureFoundSound();
+            // vibrate(100);
         } else if (!isScanPoint) {
             numOfScansUsed++;
+             playScanAnimation(col, row);
+            // playScanSound();
+            // vibrate(500);
         }
         updateUI();
         if (numOfTreasuresFound >= numOfTreasures) {
             winGame();
         }
+    }
+
+    private void vibrate(int durationInMilliseconds) {
+        Vibrator vibrator =
+                (Vibrator) this.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(durationInMilliseconds);
+    }
+
+    private void playTreasureFoundSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.treasure_found);
+        mediaPlayer.start();
+        mediaPlayer.release();
+    }
+
+    private void playScanSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.scan);
+        mediaPlayer.start();
+        mediaPlayer.release();
+    }
+
+    private void playScanAnimation(int colOfStartingCell, int rowOfStartingCell) {
+        GameCell cellToAnimate = gameCells[rowOfStartingCell][colOfStartingCell];
+        cellToAnimate.playScanAnimation(this.getApplicationContext());
+
+        for (int col = 0; col < colOfStartingCell; col++) {
+            cellToAnimate = gameCells[rowOfStartingCell][col];
+            cellToAnimate.playScanAnimation(this.getApplicationContext());
+        }
+        for (int col = colOfStartingCell; col < gameCells[0].length; col++) {
+            cellToAnimate = gameCells[rowOfStartingCell][col];
+            cellToAnimate.playScanAnimation(this.getApplicationContext());
+        }
+        for (int row = 0; row < rowOfStartingCell; row++) {
+            cellToAnimate = gameCells[row][colOfStartingCell];
+            cellToAnimate.playScanAnimation(this.getApplicationContext());
+        }
+        for (int row = rowOfStartingCell; row < gameCells.length; row++) {
+            cellToAnimate = gameCells[row][colOfStartingCell];
+            cellToAnimate.playScanAnimation(this.getApplicationContext());
+        }
+
     }
 
     private void winGame() {
@@ -220,7 +269,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private int loadBoardRow() {
         int numOfRows;
         SharedPreferences sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
-        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, Options.FOUR_BY_SIX);
+        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, Options.SIX_BY_FIFTEEN);
         switch (boardSpinVal) {
             case Options.FOUR_BY_SIX:
                 numOfRows = 4;
@@ -232,8 +281,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 numOfRows = 6;
                 break;
             default:
-                numOfRows = 4;
-                break;
+                throw new InvalidParameterException();
         }
         return numOfRows;
     }
@@ -241,7 +289,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private int loadBoardCol() {
         int numOfCols;
         SharedPreferences sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
-        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, Options.FOUR_BY_SIX);
+        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, Options.SIX_BY_FIFTEEN);
         switch (boardSpinVal) {
             case Options.FOUR_BY_SIX:
                 numOfCols = 6;
@@ -253,8 +301,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 numOfCols = 15;
                 break;
             default:
-                numOfCols = 6;
-                break;
+                throw new InvalidParameterException();
         }
         return numOfCols;
     }

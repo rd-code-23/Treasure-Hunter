@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,7 @@ public class MainMenu extends AppCompatActivity {
 
     private void setupPlayGameButton() {
         Button btn = (Button) findViewById(R.id.btn_PlayGame);
+        btn.setBackgroundColor(Color.rgb(200, 200, 255));
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = PlayGameActivity.makeIntent(MainMenu.this);
@@ -69,14 +71,14 @@ public class MainMenu extends AppCompatActivity {
         switch (requestCode) {
             case OPTIONS_REQUEST:
                 int getBoardSize = data.getIntExtra(Options.BOARD_SIZE_OPTION_KEY,
-                        Options.DEFAULT_BOARD_SIZE);
-                //TODO: UNNEEDED CODE, REMOVE AFTER TESTING
+                        -1);
+                //TODO: Remove debug code before hand in
 
                 if (getBoardSize != -1)
                     Toast.makeText(getApplicationContext(), "you received board position "
                             + getBoardSize, Toast.LENGTH_SHORT).show(); //just for testing to make sure we get right values
 
-                int getTreasureNumber = data.getIntExtra(MINE_NUM_KEY, Options.DEFAULT_MINE_NUM);
+                int getTreasureNumber = data.getIntExtra(MINE_NUM_KEY, -1);
                 if (getTreasureNumber != -1)
                     Toast.makeText(getApplicationContext(), "you received Mine position " + getTreasureNumber, Toast.LENGTH_SHORT).show();
 

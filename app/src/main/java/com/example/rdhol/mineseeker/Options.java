@@ -56,11 +56,15 @@ public class Options extends AppCompatActivity {
     private void loadSpinners() {
         SharedPreferences sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
 
-        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, DEFAULT_BOARD_SIZE);
-        boardSizeSpin.setSelection(boardSpinVal);
-        // sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
-        int mineSpinVal = sharedPref.getInt(MINE_NUM_KEY, Options.DEFAULT_MINE_NUM);
-        mineNumSpin.setSelection(mineSpinVal);
+        int boardSpinVal = sharedPref.getInt(BOARD_SIZE_OPTION_KEY, -1);
+        if (boardSpinVal != -1) {
+            boardSizeSpin.setSelection(boardSpinVal);
+        }
+        int mineSpinVal = sharedPref.getInt(MINE_NUM_KEY, -1);
+        if (mineSpinVal != -1) {
+            mineNumSpin.setSelection(mineSpinVal);
+        }
+
     }
 
     private void setupEraseTimesPlayedButton() {
@@ -155,7 +159,6 @@ public class Options extends AppCompatActivity {
     private void save(String prefName, String key, int value) {
         SharedPreferences sharedPref = getSharedPreferences(prefName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.clear();
         editor.putInt(key, value);
         editor.commit();
     }

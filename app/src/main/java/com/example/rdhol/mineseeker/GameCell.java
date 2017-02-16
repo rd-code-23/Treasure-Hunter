@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 public class GameCell {
@@ -64,6 +67,7 @@ public class GameCell {
     public boolean tryGiveTreasure() {
         if (!this.hasTreasure) {
             this.hasTreasure = true;
+
             return true;
         } else {
             return false;
@@ -76,5 +80,11 @@ public class GameCell {
 
     public boolean isScanPoint() {
         return isScanPoint;
+    }
+
+    public void playScanAnimation(Context context) {
+        Animation anim = AnimationUtils.loadAnimation(context, R.anim.scan_anim);
+        this.button.startAnimation(anim);
+
     }
 }
