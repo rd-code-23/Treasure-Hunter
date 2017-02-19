@@ -111,11 +111,6 @@ public class PlayGameActivity extends AppCompatActivity {
         updateUI();
     }
 
-
-
-
-
-
     private void gameCellClicked(int col, int row) {
         lockButtonSizes();
         final GameCell gameCellClicked = gameCells[row][col];
@@ -298,11 +293,11 @@ public class PlayGameActivity extends AppCompatActivity {
         return numOfCols;
     }
 
-    private void displayWinDialog(){
+    private void displayWinDialog() {
         FragmentManager manager = getSupportFragmentManager();
         WinDialog dialog = new WinDialog();
-        dialog.show(manager,"MessageDialog");
-        Log.i("TAG","jUST SHOWD DIALOG");
-       // finish();
+        dialog.show(manager, "MessageDialog");
+        Log.i("TAG", "jUST SHOWD DIALOG");
+        // finish();
     }
 }

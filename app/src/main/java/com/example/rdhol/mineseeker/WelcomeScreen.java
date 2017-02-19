@@ -27,6 +27,7 @@ public class WelcomeScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = MainMenu.makeIntent(WelcomeScreen.this);
                 startActivity(intent);
+                finish();
             }
         });
     }
