@@ -20,12 +20,16 @@ import android.widget.Toast;
 import java.security.InvalidParameterException;
 import java.util.Random;
 
+import static android.R.id.edit;
 import static com.example.rdhol.mineseeker.Options.BOARD_SIZE_OPTION_KEY;
 import static com.example.rdhol.mineseeker.Options.MINE_NUM_KEY;
 import static com.example.rdhol.mineseeker.Options.OPTIONS_PREFS_KEY;
+import static com.example.rdhol.mineseeker.R.id.textView;
 
 public class PlayGameActivity extends AppCompatActivity {
 
+    public static final String BEST_SCORE = "BEST_SCORE";
+    public static final String REPLACE_BEST_SCORE = "REPLACE_BEST_SCORE";
     int numOfCols;
     int numOfRows;
     private GameCell[][] gameCells;
@@ -42,11 +46,13 @@ public class PlayGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
+        loadBestScore();
         loadNumOfMines();
         loadBoardRow();
         loadBoardCol();
         setupGameCells();
         vibrator = (Vibrator) this.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+
     }
 
     private void setupGameCells() {
@@ -131,6 +137,7 @@ public class PlayGameActivity extends AppCompatActivity {
         }
         updateUI();
         if (numOfTreasuresFound >= numOfTreasures) {
+            saveBestScore();
             displayWinDialog();
         }
     }
@@ -300,4 +307,34 @@ public class PlayGameActivity extends AppCompatActivity {
         Log.i("TAG", "jUST SHOWD DIALOG");
         // finish();
     }
+
+
+    private void saveBestScore() {
+        SharedPreferences sharedPref = getSharedPreferences(BEST_SCORE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String bestScoreString = sharedPref.getString(REPLACE_BEST_SCORE, "0");
+
+        int bestScore = Integer.parseInt(bestScoreString);
+        if(bestScore <=0){
+            String newBestScore = Integer.toString(numOfScansUsed);
+            editor.putString(REPLACE_BEST_SCORE, newBestScore);
+            editor.apply();
+        }
+
+        if (numOfScansUsed < bestScore) {
+            String newBestScore = Integer.toString(numOfScansUsed);
+            editor.putString(REPLACE_BEST_SCORE, newBestScore);
+            editor.apply();
+
+        }
+    }
+
+    private void loadBestScore() {
+        SharedPreferences loadBestScore = getSharedPreferences(BEST_SCORE, Context.MODE_PRIVATE);
+        String bestScore = loadBestScore.getString(REPLACE_BEST_SCORE, "0");
+        TextView textView = (TextView) findViewById(R.id.txt_BestScore);
+        textView.setText(bestScore);
+
+    }
+
 }

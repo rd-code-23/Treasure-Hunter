@@ -41,10 +41,19 @@
     </TableLayout>
 
     <TextView
-        android:text="Times Played:"
+        android:text="Best Score:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tableForGameCells"
         android:layout_centerHorizontal="true"
         android:id="@+id/txt_TimesPlayed" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/txt_TimesPlayed"
+        android:layout_toEndOf="@+id/txt_TimesPlayed"
+        android:id="@+id/txt_BestScore" />
 </RelativeLayout>
