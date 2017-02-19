@@ -29,5 +29,6 @@
         Rock and other game textures from [http://opengameart.org/content/29-grounds-and-walls-and-water-1024x1024].
     </string>
     <string name="a_red_gem">A red gem</string>
+    <string name="You_Win">You Win</string>
 
 </resources>

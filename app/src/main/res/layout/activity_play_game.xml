@@ -39,4 +39,12 @@
         android:stretchColumns="*">
 
     </TableLayout>
+
+    <TextView
+        android:text="Times Played:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableForGameCells"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/txt_TimesPlayed" />
 </RelativeLayout>

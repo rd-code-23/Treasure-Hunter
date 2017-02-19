@@ -70,21 +70,6 @@ public class MainMenu extends AppCompatActivity {
         }
         switch (requestCode) {
             case OPTIONS_REQUEST:
-                int getBoardSize = data.getIntExtra(Options.BOARD_SIZE_OPTION_KEY,
-                        -1);
-                //TODO: Remove debug code before hand in
-
-                if (getBoardSize != -1)
-                    Toast.makeText(getApplicationContext(), "you received board position "
-                            + getBoardSize, Toast.LENGTH_SHORT).show(); //just for testing to make sure we get right values
-
-                int getTreasureNumber = data.getIntExtra(MINE_NUM_KEY, -1);
-                if (getTreasureNumber != -1)
-                    Toast.makeText(getApplicationContext(), "you received Mine position " + getTreasureNumber, Toast.LENGTH_SHORT).show();
-
-                int getEraseTimesPlayed = data.getIntExtra(ERASE_TIMES_PLAYED, -1);
-                if (getEraseTimesPlayed != -1)
-                    Toast.makeText(getApplicationContext(), "erase plays values: " + getEraseTimesPlayed, Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

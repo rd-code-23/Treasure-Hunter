@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.PersistableBundle;
 import android.os.Vibrator;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -111,17 +113,8 @@ public class PlayGameActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        //create save string here
-        outState.putString("", "");
-    }
 
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onRestoreInstanceState(savedInstanceState, persistentState);
-    }
+
 
     private void gameCellClicked(int col, int row) {
         lockButtonSizes();
@@ -143,7 +136,7 @@ public class PlayGameActivity extends AppCompatActivity {
         }
         updateUI();
         if (numOfTreasuresFound >= numOfTreasures) {
-            winGame();
+            displayWinDialog();
         }
     }
 
@@ -184,11 +177,6 @@ public class PlayGameActivity extends AppCompatActivity {
             cellToAnimate.playScanAnimation(this.getApplicationContext());
         }
 
-    }
-
-    private void winGame() {
-        //display popup,save stuff and destroy playGameActivity on exit
-        Toast.makeText(this, "YOU WIN!", Toast.LENGTH_SHORT).show();
     }
 
     private void updateUI() {
@@ -308,5 +296,13 @@ public class PlayGameActivity extends AppCompatActivity {
                 throw new InvalidParameterException();
         }
         return numOfCols;
+    }
+
+    private void displayWinDialog(){
+        FragmentManager manager = getSupportFragmentManager();
+        WinDialog dialog = new WinDialog();
+        dialog.show(manager,"MessageDialog");
+        Log.i("TAG","jUST SHOWD DIALOG");
+       // finish();
     }
 }
