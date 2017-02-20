@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import java.security.InvalidParameterException;
 
 import static com.example.rdhol.mineseeker.PlayGameActivity.BEST_SCORE;
+import static com.example.rdhol.mineseeker.PlayGameActivity.GAMES_PLAYED;
 
 public class Options extends AppCompatActivity {
 
@@ -53,6 +54,7 @@ public class Options extends AppCompatActivity {
         setupMineNumberSpin();
         setupEraseTimesPlayedButton();
         setupEraseBestScoreButton();
+        setupEraseGamesPlayed();
         loadSpinners();
     }
 
@@ -171,6 +173,18 @@ public class Options extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SharedPreferences loadBestScore = getSharedPreferences(BEST_SCORE, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = loadBestScore.edit().clear();
+                editor.commit();
+            }
+        });
+    }
+
+    private void setupEraseGamesPlayed() {
+        Button btn = (Button) findViewById(R.id.btn_EraseTimesPlayed);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences loadBestScore = getSharedPreferences(GAMES_PLAYED, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = loadBestScore.edit().clear();
                 editor.commit();
             }

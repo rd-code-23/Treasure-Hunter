@@ -25,11 +25,14 @@ import static com.example.rdhol.mineseeker.Options.BOARD_SIZE_OPTION_KEY;
 import static com.example.rdhol.mineseeker.Options.MINE_NUM_KEY;
 import static com.example.rdhol.mineseeker.Options.OPTIONS_PREFS_KEY;
 import static com.example.rdhol.mineseeker.R.id.textView;
+import static java.lang.reflect.Array.getInt;
 
 public class PlayGameActivity extends AppCompatActivity {
 
     public static final String BEST_SCORE = "BEST_SCORE";
     public static final String REPLACE_BEST_SCORE = "REPLACE_BEST_SCORE";
+    public static final String GAMES_PLAYED = "GAMES_PLAYED";
+    public static final String GET_GAMES_PLAYED = "GET_GAMES_PLAYED";
     int numOfCols;
     int numOfRows;
     private GameCell[][] gameCells;
@@ -47,6 +50,7 @@ public class PlayGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
         loadBestScore();
+        loadNumberOfGames();
         loadNumOfMines();
         loadBoardRow();
         loadBoardCol();
@@ -60,6 +64,7 @@ public class PlayGameActivity extends AppCompatActivity {
         //TODO: Add error handling for loading/saving
         //TODO: MOVE code into a separate class, this method is way to large
         //TODO: HANDLE saving  on exit
+
 
         numOfTreasuresFound = 0;
         numOfScansUsed = 0;
@@ -138,6 +143,7 @@ public class PlayGameActivity extends AppCompatActivity {
         updateUI();
         if (numOfTreasuresFound >= numOfTreasures) {
             saveBestScore();
+            saveNumberOfGames();
             displayWinDialog();
         }
     }
@@ -315,7 +321,7 @@ public class PlayGameActivity extends AppCompatActivity {
         String bestScoreString = sharedPref.getString(REPLACE_BEST_SCORE, "0");
 
         int bestScore = Integer.parseInt(bestScoreString);
-        if(bestScore <=0){
+        if (bestScore <= 0) {
             String newBestScore = Integer.toString(numOfScansUsed);
             editor.putString(REPLACE_BEST_SCORE, newBestScore);
             editor.apply();
@@ -334,6 +340,24 @@ public class PlayGameActivity extends AppCompatActivity {
         String bestScore = loadBestScore.getString(REPLACE_BEST_SCORE, "0");
         TextView textView = (TextView) findViewById(R.id.txt_BestScore);
         textView.setText(bestScore);
+
+    }
+
+    private void saveNumberOfGames() {
+        SharedPreferences sharedPref = getSharedPreferences(GAMES_PLAYED, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        int gamesPlayed = sharedPref.getInt(GET_GAMES_PLAYED, 0);
+        gamesPlayed += 1;
+        editor.putInt(GET_GAMES_PLAYED, gamesPlayed);
+        editor.apply();
+    }
+
+    private void loadNumberOfGames() {
+        SharedPreferences loadGamesPlayed = getSharedPreferences(GAMES_PLAYED, Context.MODE_PRIVATE);
+        int numGamesPlayed = loadGamesPlayed.getInt(GET_GAMES_PLAYED, 0);
+        TextView textView = (TextView) findViewById(R.id.txt_GamesPlayed);
+        String numGamesPlayedString = String.valueOf(numGamesPlayed);
+        textView.setText(numGamesPlayedString);
 
     }
 

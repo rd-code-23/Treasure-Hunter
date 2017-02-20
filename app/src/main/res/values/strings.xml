@@ -31,5 +31,6 @@
     </string>
     <string name="a_red_gem">A red gem</string>
     <string name="Reset_Best_Score">reset best score</string>
+    <string name="Times_Played">Times Played:</string>
 
 </resources>
