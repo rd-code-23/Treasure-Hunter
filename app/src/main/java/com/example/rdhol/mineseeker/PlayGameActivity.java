@@ -1,9 +1,9 @@
 package com.example.rdhol.mineseeker;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.os.PersistableBundle;
 import android.os.Vibrator;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +14,14 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import java.security.InvalidParameterException;
 import java.util.Random;
-import static android.R.id.edit;
+
 import static com.example.rdhol.mineseeker.Options.BOARD_SIZE_OPTION_KEY;
 import static com.example.rdhol.mineseeker.Options.MINE_NUM_KEY;
 import static com.example.rdhol.mineseeker.Options.OPTIONS_PREFS_KEY;
-import static com.example.rdhol.mineseeker.R.id.textView;
-import static java.lang.reflect.Array.getInt;
+
 public class PlayGameActivity extends AppCompatActivity {
     public static final String BEST_SCORE = "BEST_SCORE";
     public static final String REPLACE_BEST_SCORE = "REPLACE_BEST_SCORE";
@@ -35,9 +34,11 @@ public class PlayGameActivity extends AppCompatActivity {
     private int numOfScansUsed;
     private int numOfTreasuresFound;
     private Vibrator vibrator;
+
     public static Intent makeIntent(Context context) {
         return new Intent(context, PlayGameActivity.class);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class PlayGameActivity extends AppCompatActivity {
         setupGameCells();
         vibrator = (Vibrator) this.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
     }
+
     private void setupGameCells() {
         //TODO: Add error handling for loading/saving
         //TODO: MOVE code into a separate class, this method is way to large
@@ -104,6 +106,7 @@ public class PlayGameActivity extends AppCompatActivity {
         }
         updateUI();
     }
+
     private void gameCellClicked(int col, int row) {
         lockButtonSizes();
         final GameCell gameCellClicked = gameCells[row][col];
@@ -128,19 +131,23 @@ public class PlayGameActivity extends AppCompatActivity {
             displayWinDialog();
         }
     }
+
     private void vibrate(int durationInMilliseconds) {
         if (vibrator != null && vibrator.hasVibrator()) {
             vibrator.vibrate(durationInMilliseconds);
         }
     }
+
     private void playTreasureFoundSound() {
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.treasure_found);
         mediaPlayer.start();
     }
+
     private void playScanSound() {
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.scan);
         mediaPlayer.start();
     }
+
     private void playScanAnimation(int colOfStartingCell, int rowOfStartingCell) {
         GameCell cellToAnimate = gameCells[rowOfStartingCell][colOfStartingCell];
         cellToAnimate.playScanAnimation(this.getApplicationContext());
@@ -161,6 +168,7 @@ public class PlayGameActivity extends AppCompatActivity {
             cellToAnimate.playScanAnimation(this.getApplicationContext());
         }
     }
+
     private void updateUI() {
         TextView txtNumOfTreasuresFound = (TextView) findViewById(R.id.txtNumOfTreasuresFound);
         txtNumOfTreasuresFound.setText(numOfTreasuresFound + " of " +
@@ -172,35 +180,28 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int row = 0; row < gameCells.length; row++) {
             for (int col = 0; col < gameCells[row].length; col++) {
                 if (gameCells[row][col].isScanPoint()) {
-                    updateScanPoints(col, row);
+                    updateScanPointNumber(col, row);
                 }
             }
         }
     }
-    private void updateScanPoints(int col, int row) {
+
+    private void updateScanPointNumber(int col, int row) {
         int numOfTreasureFoundInScan = 0;
-        for (int i = 0; i < row; i++) {
+       
+        for (int i = 0; i < numOfRows; i++) {
             if (gameCells[i][col].hasHiddenTreasure()) {
                 numOfTreasureFoundInScan++;
             }
         }
-        for (int i = row; i < numOfRows; i++) {
-            if (gameCells[i][col].hasHiddenTreasure()) {
-                numOfTreasureFoundInScan++;
-            }
-        }
-        for (int i = 0; i < col; i++) {
-            if (gameCells[row][i].hasHiddenTreasure()) {
-                numOfTreasureFoundInScan++;
-            }
-        }
-        for (int i = row; i < numOfCols; i++) {
+        for (int i = 0; i < numOfCols; i++) {
             if (gameCells[row][i].hasHiddenTreasure()) {
                 numOfTreasureFoundInScan++;
             }
         }
         gameCells[row][col].displayText("" + numOfTreasureFoundInScan);
     }
+
     private void lockButtonSizes() {
         //lock button sizes
         for (int row = 0; row < numOfRows; row++) {
@@ -209,6 +210,7 @@ public class PlayGameActivity extends AppCompatActivity {
             }
         }
     }
+
     private int loadNumOfMines() {
         int numOfTreasure;
         SharedPreferences sharedPref;
@@ -233,6 +235,7 @@ public class PlayGameActivity extends AppCompatActivity {
         }
         return numOfTreasure;
     }
+
     private int loadBoardRow() {
         int numOfRows;
         SharedPreferences sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
@@ -252,6 +255,7 @@ public class PlayGameActivity extends AppCompatActivity {
         }
         return numOfRows;
     }
+
     private int loadBoardCol() {
         int numOfCols;
         SharedPreferences sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
@@ -271,6 +275,7 @@ public class PlayGameActivity extends AppCompatActivity {
         }
         return numOfCols;
     }
+
     private void displayWinDialog() {
         FragmentManager manager = getSupportFragmentManager();
         WinDialog dialog = new WinDialog();
@@ -278,6 +283,7 @@ public class PlayGameActivity extends AppCompatActivity {
         Log.i("TAG", "jUST SHOWD DIALOG");
         // finish();
     }
+
     private void saveBestScore() {
         SharedPreferences sharedPref = getSharedPreferences(BEST_SCORE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -294,12 +300,14 @@ public class PlayGameActivity extends AppCompatActivity {
             editor.apply();
         }
     }
+
     private void loadBestScore() {
         SharedPreferences loadBestScore = getSharedPreferences(BEST_SCORE, Context.MODE_PRIVATE);
         String bestScore = loadBestScore.getString(REPLACE_BEST_SCORE, "0");
         TextView textView = (TextView) findViewById(R.id.txt_BestScore);
         textView.setText(bestScore);
     }
+
     private void saveNumberOfGames() {
         SharedPreferences sharedPref = getSharedPreferences(GAMES_PLAYED, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -308,6 +316,7 @@ public class PlayGameActivity extends AppCompatActivity {
         editor.putInt(GET_GAMES_PLAYED, gamesPlayed);
         editor.apply();
     }
+
     private void loadNumberOfGames() {
         SharedPreferences loadGamesPlayed = getSharedPreferences(GAMES_PLAYED, Context.MODE_PRIVATE);
         int numGamesPlayed = loadGamesPlayed.getInt(GET_GAMES_PLAYED, 0);
