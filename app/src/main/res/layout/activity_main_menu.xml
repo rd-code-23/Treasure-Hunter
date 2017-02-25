@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main_menu"
     android:layout_width="match_parent"
@@ -8,36 +9,71 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/piratemap"
     tools:context="com.example.rdhol.mineseeker.MainMenu">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:srcCompat="@drawable/scroll3"
+        android:id="@+id/imageView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="144dp"
+        android:layout_marginEnd="144dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical">
+        android:layout_alignRight="@+id/imageView5"
+        android:layout_alignEnd="@+id/imageView5"
+        android:layout_marginTop="57dp">
 
         <Button
             android:id="@+id/btn_PlayGame"
-            android:layout_width="321dp"
+            android:text="@string/Play_Game"
+            android:layout_marginBottom="7dp"
+            android:layout_above="@+id/btn_Help"
+            android:layout_width="140dp"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/linearLayout2"
-            android:text="@string/Play_Game" />
+            android:textSize="18sp"
+            android:fontFamily="cursive"
+            android:textColor="@android:color/black"
+            android:textStyle="normal|bold" />
 
         <Button
             android:id="@+id/btn_Options"
-            android:layout_width="321dp"
             android:layout_height="wrap_content"
-            android:text="@string/Options" />
+            android:text="@string/Options"
+            android:layout_width="140dp"
+            android:layout_alignBaseline="@+id/btn_Help"
+            android:layout_alignBottom="@+id/btn_Help"
+            android:layout_centerHorizontal="true"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textSize="18sp"
+            android:fontFamily="cursive"
+            android:textStyle="normal|bold" />
 
         <Button
             android:id="@+id/btn_Help"
-            android:layout_width="323dp"
-            android:layout_height="wrap_content"
-            android:text="@string/Help" />
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:text="@string/Help"
+            android:layout_marginBottom="59dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/btn_PlayGame"
+            android:layout_alignEnd="@+id/btn_PlayGame"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:fontFamily="cursive"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
     </LinearLayout>
 
 </RelativeLayout>
