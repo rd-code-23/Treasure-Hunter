@@ -55,16 +55,7 @@
         android:layout_alignParentEnd="true"
         android:visibility="visible" />
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/steeringwheel"
-        android:layout_below="@+id/tittle"
-        android:layout_toLeftOf="@+id/image_DiamondRight"
-        android:layout_toStartOf="@+id/image_DiamondRight"
-        android:layout_marginTop="87dp"
-        android:id="@+id/imageButton"
-        android:visibility="gone" />
+
 
     <TextView
         android:id="@+id/tittle"
