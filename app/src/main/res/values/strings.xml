@@ -2,7 +2,7 @@
     <string name="app_name">Treasure Hunter</string>
     <string name="By_Rishi">By Rishi Dholliwar</string>
     <string name="By_Ali">By Ali Maladwala</string>
-    <string name="Main_Menu">Main Menu</string>
+    <string name="Main_Menu">Main\nMenu</string>
     <string name="Play_Game">Play Game!</string>
     <string name="Options">Options</string>
     <string name="Help">Help</string>

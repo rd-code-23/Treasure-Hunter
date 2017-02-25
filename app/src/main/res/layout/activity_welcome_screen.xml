@@ -9,38 +9,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.rdhol.mineseeker.WelcomeScreen">
+    android:background="@drawable/piratemap"
+    tools:context="com.example.rdhol.mineseeker.WelcomeScreen"
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="68dp"
-        android:text="@string/By_Rishi" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_marginTop="29dp"
-        android:text="@string/By_Ali" />
-
-    <Button
-        android:id="@+id/btn_MainMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_marginEnd="42dp"
-        android:layout_marginRight="42dp"
-        android:text="@string/Main_Menu" />
+    >
 
     <TextView
         android:id="@+id/tittle"
@@ -55,9 +27,9 @@
         android:layout_weight="1"
         android:text="@string/app_name"
         android:textAlignment="center"
-        android:textColor="#F00"
-        android:textSize="30sp"
-        android:textStyle="normal|bold|italic" />
+        android:textSize="40sp"
+        android:textStyle="normal|bold|italic"
+        android:fontFamily="cursive" />
 
     <ImageView
         android:id="@+id/image_DiamondLeft"
@@ -84,5 +56,46 @@
         android:layout_weight="1"
         android:contentDescription="@string/a_red_gem"
         app:srcCompat="@drawable/diamond256" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:text="@string/By_Rishi"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/By_Ali"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignBottom="@+id/btn_MainMenu"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btn_MainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:text="@string/Main_Menu"
+        android:background="@drawable/scroll64"
+        android:textStyle="normal|bold"
+        android:fontFamily="cursive"
+        android:textSize="18sp"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="visible" />
 
 </RelativeLayout>
