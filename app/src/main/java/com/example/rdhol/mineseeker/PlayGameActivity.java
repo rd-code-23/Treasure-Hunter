@@ -293,8 +293,7 @@ public class PlayGameActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         WinDialog dialog = new WinDialog();
         dialog.show(manager, "MessageDialog");
-        Log.i("TAG", "jUST SHOWD DIALOG");
-        // finish();
+
     }
 
     private void saveBestScore() {

@@ -3,17 +3,16 @@ package com.example.rdhol.mineseeker;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
-/**
- * Created by rdhol on 2017-02-18.
- */
 
 public class WinDialog extends AppCompatDialogFragment {
+
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //create the view
@@ -28,7 +27,6 @@ public class WinDialog extends AppCompatDialogFragment {
                         getActivity().finish();
                         break;
                 }
-                Log.i("Tag", "you clicked the dialog button");
             }
         };
 

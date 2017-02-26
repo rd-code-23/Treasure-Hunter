@@ -10,6 +10,7 @@
     <string name="Board_size">Board size</string>
     <string name="Num_Mines"># Mines</string>
 
+
     <string-array name="Spin_Board_sizes">
         <item>4 x 6</item>
         <item>5 x 10</item>
@@ -24,14 +25,28 @@
     </string-array>
     <string name="Erase_times_played">Erase times played</string>
     <string name="title_activity_play_game">PlayGameActivity</string>
-    <string name="jewelImageCredit">
-        Jewel Icon made by [http://www.flaticon.com/authors/madebyoliver] from www.flaticon.com,
-        Rock and other game textures from [http://opengameart.org/content/29-grounds-and-walls-and-water-1024x1024].
-        Chest Icon made by [http://www.flaticon.com/authors/madebyoliver] from www.flaticon.com,
 
-    </string>
     <string name="a_red_gem">A red gem</string>
     <string name="Reset_Best_Score">Reset best score</string>
     <string name="Times_Played">Times Played:</string>
+
+    <string name="about_game_text">
+        This Treasure Hunter game was developed by Rishi and Ali for the
+        CMPT 276 class at SFU(http://www.cs.sfu.ca/CourseCentral/276/bfraser/index.html)
+    </string>
+    <string name="how_to_play">Welcome to Treasure Hunter.
+        To play the game press PLAY GAME on the main menu. Then select a tile to search for treasure,
+        If you find a treasure an image of a gem will appear, otherwise a number will appear that
+        shows you the amount of hidden treasure in the same row and column as the tile you just clicked.
+        Find all the treasure to win!
+    </string>
+     <string name="jewelImageCredit">
+        Jewel Icon made by [http://www.flaticon.com/authors/madebyoliver] from www.flaticon.com,
+        Rock and other game textures from [http://opengameart.org/content/29-grounds-and-walls-and-water-1024x1024].
+        Chest Icon made by [http://www.flaticon.com/authors/madebyoliver] from www.flaticon.com,
+        Sounds generated using BFXR(http://www.bfxr.net/)
+
+    </string>
+    <string name="best_score">Best Score:</string>
 
 </resources>

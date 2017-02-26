@@ -4,11 +4,11 @@
     android:id="@+id/activity_play_game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/piratemap2"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/piratemap2"
     tools:context="com.example.rdhol.mineseeker.PlayGameActivity">
 
     <TextView
@@ -50,7 +50,7 @@
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/txt_TimesPlayed"
         android:layout_toRightOf="@+id/txt_TimesPlayed"
-        android:text="TextView" />
+        android:text="" />
 
     <TextView
         android:id="@+id/textView5"
@@ -72,7 +72,7 @@
         android:layout_marginStart="61dp"
         android:layout_toEndOf="@+id/txt_GamesPlayed"
         android:layout_toRightOf="@+id/txt_GamesPlayed"
-        android:text="Best Score:" />
+        android:text="@string/best_score" />
 
     <TextView
         android:id="@+id/txt_GamesPlayed"
@@ -83,5 +83,5 @@
         android:layout_marginStart="7dp"
         android:layout_toEndOf="@+id/textView5"
         android:layout_toRightOf="@+id/textView5"
-        android:text="FFF" />
+        android:text="" />
 </RelativeLayout>
