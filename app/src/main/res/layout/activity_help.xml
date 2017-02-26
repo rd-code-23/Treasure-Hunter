@@ -12,31 +12,15 @@
     tools:context="com.example.rdhol.mineseeker.HelpActivity">
 
     <TextView
-        android:id="@+id/txt_image_sources"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:autoLink="web"
-        android:text="@string/jewelImageCredit" />
-
-    <TextView
-        android:id="@+id/about_authors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:autoLink="web"
-        android:text="@string/about_game_text" />
-
-    <TextView
         android:id="@+id/txt_how_to_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:autoLink="web"
-        android:text="@string/how_to_play" />
+        android:text="@string/Help_Text"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

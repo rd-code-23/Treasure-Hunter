@@ -2,6 +2,7 @@ package com.example.rdhol.mineseeker;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -9,6 +10,10 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+
+import static android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
+import static android.app.AlertDialog.THEME_HOLO_LIGHT;
 
 
 public class WinDialog extends AppCompatDialogFragment {

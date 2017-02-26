@@ -31,20 +31,50 @@
     <string name="Times_Played">Times Played:</string>
 
     <string name="about_game_text">
-        This Treasure Hunter game was developed by Rishi and Ali for the
-        CMPT 276 class at SFU(http://www.cs.sfu.ca/CourseCentral/276/bfraser/index.html)
+
     </string>
-    <string name="how_to_play">Welcome to Treasure Hunter.
-        To play the game press PLAY GAME on the main menu. Then select a tile to search for treasure,
+    <string name="Help_Text">
+        Welcome to Treasure Hunter.\n\n
+        How To Play:\n
+       \t To play the game press PLAY GAME on the main menu. Then select a tile to search for treasure,
         If you find a treasure an image of a gem will appear, otherwise a number will appear that
         shows you the amount of hidden treasure in the same row and column as the tile you just clicked.
-        Find all the treasure to win!
+        Find all the treasure to win!\n\n
+
+        Info:\n
+        \tThis Treasure Hunter game was developed by Rishi and Ali for the
+        CMPT 276 class at:\n
+        http://www.cs.sfu.ca/CourseCentral/276/bfraser/index.html)\n\n
+
+        Credits:\n
+         \tJewel Icon made by:\n
+        http://www.flaticon.com/authors/madebyoliver from www.flaticon.com\n\n
+         \tRock Icon made by:\n
+        http://opengameart.org/content/29-grounds-and-walls-and-water-1024x1024.\n\n
+        \tChest Icon made by:\n
+        http://www.flaticon.com/free-icon/chest_332026 from www.flaticon.com\n\n
+        \tSounds generated using BFXR:\n
+        http://www.bfxr.net/\n\n
+        \tHelm Icon made by:\n
+        http://www.flaticon.com/free-icon/helm_293510 from www.flaticon.com\n\n
+        \tScroll Icon on Welcome screen made by:
+        http://www.flaticon.com/free-icon/open-scroll-outline_32571 from www.flaticon.com\n\n
+        \tScroll Icon on Main Menu screen made by:\n
+        http://www.freeiconspng.com/free-images/scroll-png-26405\n\n
+       \t Pirate Ship Icon made by:\n
+        http://image-bros.club/p/pirate-ship-png.html\n\n
+        \t Welcome and Main Menu background made by: \n
+        https://pixabay.com/en/background-treasure-map-map-1675212/\n\n
+        \t Play Game, Options and Help background made by:\n
+        http://www.georgemaps.com/travel-map-background-why-i-m-backpacking-around-the-world-travels-without-pants-oldworldmap/\n\n
+
+
+
+
     </string>
-     <string name="jewelImageCredit">
-        Jewel Icon made by [http://www.flaticon.com/authors/madebyoliver] from www.flaticon.com,
-        Rock and other game textures from [http://opengameart.org/content/29-grounds-and-walls-and-water-1024x1024].
-        Chest Icon made by [http://www.flaticon.com/authors/madebyoliver] from www.flaticon.com,
-        Sounds generated using BFXR(http://www.bfxr.net/)
+
+     <string name="jewelImageCredit">\n
+
 
     </string>
     <string name="best_score">Best Score:</string>
