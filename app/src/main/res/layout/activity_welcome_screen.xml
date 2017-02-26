@@ -52,7 +52,6 @@
         android:layout_marginTop="41dp"
         android:layout_toLeftOf="@+id/btn_MainMenu"
         android:layout_toStartOf="@+id/btn_MainMenu"
-        android:layout_weight="1"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="#F00"
@@ -68,7 +67,6 @@
         android:layout_marginRight="18dp"
         android:layout_toLeftOf="@+id/tittle"
         android:layout_toStartOf="@+id/tittle"
-        android:layout_weight="1"
         android:contentDescription="@string/a_red_gem"
         app:srcCompat="@drawable/diamond256" />
 
@@ -81,7 +79,6 @@
         android:layout_alignTop="@+id/tittle"
         android:layout_marginEnd="57dp"
         android:layout_marginRight="57dp"
-        android:layout_weight="1"
         android:contentDescription="@string/a_red_gem"
         app:srcCompat="@drawable/diamond256" />
 

@@ -188,7 +188,6 @@ public class PlayGameActivity extends AppCompatActivity {
 
     private void updateScanPointNumber(int col, int row) {
         int numOfTreasureFoundInScan = 0;
-       
         for (int i = 0; i < numOfRows; i++) {
             if (gameCells[i][col].hasHiddenTreasure()) {
                 numOfTreasureFoundInScan++;
