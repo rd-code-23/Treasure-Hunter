@@ -70,9 +70,6 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void setupGameCells() {
-        //TODO: Add error handling for loading/saving
-        //TODO: MOVE code into a separate class, this method is way to large
-        //TODO: HANDLE saving  on exit
         numOfTreasuresFound = 0;
         numOfScansUsed = 0;
         numOfRows = loadBoardRow();
@@ -192,7 +189,6 @@ public class PlayGameActivity extends AppCompatActivity {
                 numOfTreasures + " treasures found");
         TextView txtNumOfScansUsed = (TextView) findViewById(R.id.txtNumOfScansUsed);
         txtNumOfScansUsed.setText(numOfScansUsed + " Scans used");
-        //TODO: move gameCell array to a gameBoard class
         //go through the gameCells and update UI of scan points
         for (int row = 0; row < gameCells.length; row++) {
             for (int col = 0; col < gameCells[row].length; col++) {
