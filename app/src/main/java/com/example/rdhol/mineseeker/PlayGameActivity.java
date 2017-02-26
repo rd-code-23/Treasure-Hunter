@@ -24,11 +24,28 @@ import static com.example.rdhol.mineseeker.Options.OPTIONS_PREFS_KEY;
 
 public class PlayGameActivity extends AppCompatActivity {
     public static final String BEST_SCORE = "BEST_SCORE";
-    public static final String REPLACE_BEST_SCORE = "REPLACE_BEST_SCORE";
+
+
     public static final String GAMES_PLAYED = "GAMES_PLAYED";
     public static final String GET_GAMES_PLAYED = "GET_GAMES_PLAYED";
+    public static final String SCORE_FOUR_BY_SIX_MINES_SIX = "SCORE_FOUR_BY_SIX_MINES_SIX";
+    public static final String SCORE_FOUR_BY_SIX_MINES_TEN = "SCORE_FOUR_BY_SIX_MINES_TEN";
+    public static final String SCORE_FOUR_BY_SIX_MINES_FIFTEEN = "SCORE_FOUR_BY_SIX_MINES_FIFTEEN";
+    public static final String SCORE_FOUR_BY_SIX_MINES_TWENTY = "SCORE_FOUR_BY_SIX_MINES_TWENTY";
+
+    public static final String SCORE_FIVE_BY_TEN_MINES_SIX = "SCORE_FIVE_BY_TEN_MINES_SIX";
+    public static final String SCORE_FIVE_BY_TEN_MINES_TEN = " SCORE_FIVE_BY_TEN_MINES_TEN";
+    public static final String SCORE_FIVE_BY_TEN_MINES_FIFTEEN = "SCORE_FIVE_BY_TEN_MINES_FIFTEEN";
+    public static final String SCORE_FIVE_BY_TEN_MINES_TWENTY = " SCORE_FIVE_BY_TEN_MINES_TWENTY";
+
+    public static final String SCORE_SIX_BY_FIFTEEN_MINES_SIX = " SCORE_SIX_BY_FIFTEEN_MINES_SIX";
+    public static final String SCORE_SIX_BY_FIFTEEN_MINES_TEN = " SCORE_SIX_BY_FIFTEEN_MINES_TEN_";
+    public static final String SCORE_SIX_BY_FIFTEEN_MINES_FIFTEEN = "SCORE_SIX_BY_FIFTEEN_MINES_FIFTEEN";
+    public static final String SCORE_SIX_BY_FIFTEEN_MINES_TWENTY = "SCORE_SIX_BY_FIFTEEN_MINES_TWENTY";
     int numOfCols;
     int numOfRows;
+    private int numOfTreasureLoaded;
+    private int bestScore;
     private GameCell[][] gameCells;
     private int numOfTreasures;
     private int numOfScansUsed;
@@ -43,12 +60,12 @@ public class PlayGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
-        loadBestScore();
         loadNumberOfGames();
         loadNumOfMines();
         loadBoardRow();
         loadBoardCol();
         setupGameCells();
+        loadBestScore();
         vibrator = (Vibrator) this.getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
     }
 
@@ -188,6 +205,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
     private void updateScanPointNumber(int col, int row) {
         int numOfTreasureFoundInScan = 0;
+
         for (int i = 0; i < numOfRows; i++) {
             if (gameCells[i][col].hasHiddenTreasure()) {
                 numOfTreasureFoundInScan++;
@@ -211,28 +229,28 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private int loadNumOfMines() {
-        int numOfTreasure;
+
         SharedPreferences sharedPref;
         sharedPref = getSharedPreferences(OPTIONS_PREFS_KEY, Context.MODE_PRIVATE);
         int mineSpinVal = sharedPref.getInt(MINE_NUM_KEY, Options.SIX_MINES);
         switch (mineSpinVal) {
             case Options.SIX_MINES:
-                numOfTreasure = 6;
+                numOfTreasureLoaded = 6;
                 break;
             case Options.TEN_MINES:
-                numOfTreasure = 10;
+                numOfTreasureLoaded = 10;
                 break;
             case Options.FIFTEEN_MINES:
-                numOfTreasure = 15;
+                numOfTreasureLoaded = 15;
                 break;
             case Options.TWENTY_MINES:
-                numOfTreasure = 20;
+                numOfTreasureLoaded = 20;
                 break;
             default:
-                numOfTreasure = 6;
+                numOfTreasureLoaded = 6;
                 break;
         }
-        return numOfTreasure;
+        return numOfTreasureLoaded;
     }
 
     private int loadBoardRow() {
@@ -286,25 +304,129 @@ public class PlayGameActivity extends AppCompatActivity {
     private void saveBestScore() {
         SharedPreferences sharedPref = getSharedPreferences(BEST_SCORE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        String bestScoreString = sharedPref.getString(REPLACE_BEST_SCORE, "0");
-        int bestScore = Integer.parseInt(bestScoreString);
-        if (bestScore <= 0) {
+        if (bestScore <= 0 || numOfScansUsed < bestScore) {
             String newBestScore = Integer.toString(numOfScansUsed);
-            editor.putString(REPLACE_BEST_SCORE, newBestScore);
+
+            if (numOfRows == 4 && numOfCols == 6 && numOfTreasureLoaded == 6) {
+                editor.putString(SCORE_FOUR_BY_SIX_MINES_SIX, newBestScore);
+            }
+
+            if (numOfRows == 4 && numOfCols == 6 && numOfTreasureLoaded == 10) {
+                editor.putString(SCORE_FOUR_BY_SIX_MINES_TEN, newBestScore);
+            }
+
+            if (numOfRows == 4 && numOfCols == 6 && numOfTreasureLoaded == 15) {
+                editor.putString(SCORE_FOUR_BY_SIX_MINES_FIFTEEN, newBestScore);
+            }
+
+            if (numOfRows == 4 && numOfCols == 6 && numOfTreasureLoaded == 20) {
+                editor.putString(SCORE_FOUR_BY_SIX_MINES_TWENTY, newBestScore);
+            }
+
+            if (numOfRows == 5 && numOfCols == 10 && numOfTreasureLoaded == 6) {
+                editor.putString(SCORE_FIVE_BY_TEN_MINES_SIX, newBestScore);
+            }
+
+            if (numOfRows == 5 && numOfCols == 10 && numOfTreasureLoaded == 10) {
+                editor.putString(SCORE_FIVE_BY_TEN_MINES_TEN, newBestScore);
+            }
+
+            if (numOfRows == 5 && numOfCols == 10 && numOfTreasureLoaded == 15) {
+                editor.putString(SCORE_FIVE_BY_TEN_MINES_FIFTEEN, newBestScore);
+            }
+
+            if (numOfRows == 5 && numOfCols == 10 && numOfTreasureLoaded == 20) {
+                editor.putString(SCORE_FIVE_BY_TEN_MINES_TWENTY, newBestScore);
+            }
+
+
+            if (numOfRows == 6 && numOfCols == 15 && numOfTreasureLoaded == 6) {
+                editor.putString(SCORE_SIX_BY_FIFTEEN_MINES_SIX, newBestScore);
+            }
+
+            if (numOfRows == 6 && numOfCols == 15 && numOfTreasureLoaded == 10) {
+                editor.putString(SCORE_SIX_BY_FIFTEEN_MINES_TEN, newBestScore);
+            }
+
+            if (numOfRows == 6 && numOfCols == 15 && numOfTreasureLoaded == 15) {
+                editor.putString(SCORE_SIX_BY_FIFTEEN_MINES_FIFTEEN, newBestScore);
+            }
+
+            if (numOfRows == 6 && numOfCols == 15 && numOfTreasureLoaded == 20) {
+                editor.putString(SCORE_SIX_BY_FIFTEEN_MINES_TWENTY, newBestScore);
+            }
+
+
             editor.apply();
-        }
-        if (numOfScansUsed < bestScore) {
-            String newBestScore = Integer.toString(numOfScansUsed);
-            editor.putString(REPLACE_BEST_SCORE, newBestScore);
-            editor.apply();
+
         }
     }
 
     private void loadBestScore() {
         SharedPreferences loadBestScore = getSharedPreferences(BEST_SCORE, Context.MODE_PRIVATE);
-        String bestScore = loadBestScore.getString(REPLACE_BEST_SCORE, "0");
+        String bestScoreString = null;
+        if (numOfRows == 4 && numOfCols == 6 && numOfTreasureLoaded == 6) {
+            bestScoreString = loadBestScore.getString(SCORE_FOUR_BY_SIX_MINES_SIX, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 4 && numOfCols == 6 && numOfTreasureLoaded == 10) {
+            bestScoreString = loadBestScore.getString(SCORE_FOUR_BY_SIX_MINES_TEN, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 4 && numOfCols == 6 && numOfTreasureLoaded == 15) {
+            bestScoreString = loadBestScore.getString(SCORE_FOUR_BY_SIX_MINES_FIFTEEN, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 4 && numOfCols == 6 && numOfTreasureLoaded == 20) {
+            bestScoreString = loadBestScore.getString(SCORE_FOUR_BY_SIX_MINES_TWENTY, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 5 && numOfCols == 10 && numOfTreasureLoaded == 6) {
+            bestScoreString = loadBestScore.getString(SCORE_FIVE_BY_TEN_MINES_SIX, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 5 && numOfCols == 10 && numOfTreasureLoaded == 10) {
+            bestScoreString = loadBestScore.getString(SCORE_FIVE_BY_TEN_MINES_TEN, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 5 && numOfCols == 10 && numOfTreasureLoaded == 15) {
+            bestScoreString = loadBestScore.getString(SCORE_FIVE_BY_TEN_MINES_FIFTEEN, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 5 && numOfCols == 10 && numOfTreasureLoaded == 20) {
+            bestScoreString = loadBestScore.getString(SCORE_FIVE_BY_TEN_MINES_TWENTY, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 6 && numOfCols == 15 && numOfTreasureLoaded == 6) {
+            bestScoreString = loadBestScore.getString(SCORE_SIX_BY_FIFTEEN_MINES_SIX, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 6 && numOfCols == 15 && numOfTreasureLoaded == 10) {
+            bestScoreString = loadBestScore.getString(SCORE_SIX_BY_FIFTEEN_MINES_TEN, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 6 && numOfCols == 15 && numOfTreasureLoaded == 15) {
+            bestScoreString = loadBestScore.getString(SCORE_SIX_BY_FIFTEEN_MINES_FIFTEEN, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
+        if (numOfRows == 6 && numOfCols == 15 && numOfTreasureLoaded == 20) {
+            bestScoreString = loadBestScore.getString(SCORE_SIX_BY_FIFTEEN_MINES_TWENTY, "0");
+            bestScore = Integer.parseInt(bestScoreString);
+        }
+
         TextView textView = (TextView) findViewById(R.id.txt_BestScore);
-        textView.setText(bestScore);
+        textView.setText(bestScoreString);
     }
 
     private void saveNumberOfGames() {

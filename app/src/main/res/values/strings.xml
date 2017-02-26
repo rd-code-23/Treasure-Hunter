@@ -2,8 +2,8 @@
     <string name="app_name">Treasure Hunter</string>
     <string name="By_Rishi">By Rishi Dholliwar</string>
     <string name="By_Ali">By Ali Maladwala</string>
-    <string name="Main_Menu">Main Menu</string>
-    <string name="Play_Game">Play Game!</string>
+    <string name="Main_Menu">Main\nMenu</string>
+    <string name="Play_Game">Play Game</string>
     <string name="Options">Options</string>
     <string name="Help">Help</string>
     <string name="Settings">Settings</string>
@@ -30,7 +30,7 @@
         Chest Icon made by [http://www.flaticon.com/authors/madebyoliver] from www.flaticon.com,
     </string>
     <string name="a_red_gem">A red gem</string>
-    <string name="Reset_Best_Score">reset best score</string>
+    <string name="Reset_Best_Score">Reset best score</string>
     <string name="Times_Played">Times Played:</string>
 
 </resources>

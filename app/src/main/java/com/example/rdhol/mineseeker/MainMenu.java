@@ -33,7 +33,6 @@ public class MainMenu extends AppCompatActivity {
 
     private void setupPlayGameButton() {
         Button btn = (Button) findViewById(R.id.btn_PlayGame);
-        btn.setBackgroundColor(Color.rgb(200, 200, 255));
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = PlayGameActivity.makeIntent(MainMenu.this);

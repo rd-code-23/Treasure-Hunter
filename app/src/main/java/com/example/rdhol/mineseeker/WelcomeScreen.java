@@ -7,13 +7,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+
 public class WelcomeScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
-        setupDiamondLeftAnim();
-        setupDiamondRightAnim();
+
+        helmAnim();
         setupMainMenuButton();
     }
     private void setupMainMenuButton() {
@@ -26,14 +27,11 @@ public class WelcomeScreen extends AppCompatActivity {
             }
         });
     }
-    private void setupDiamondLeftAnim() {
-        ImageView diamond = (ImageView) findViewById(R.id.image_DiamondLeft);
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
+
+    private void helmAnim(){
+         ImageView diamond = (ImageView) findViewById(R.id.image_Helm);
+         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.spin);
         diamond.startAnimation(animation);
     }
-    private void setupDiamondRightAnim() {
-        ImageView diamond = (ImageView) findViewById(R.id.image_DiamondRight);
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
-        diamond.startAnimation(animation);
-    }
+
 }
