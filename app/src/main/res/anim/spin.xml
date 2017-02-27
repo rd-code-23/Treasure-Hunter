@@ -4,7 +4,8 @@
 
 
 
-    <!--http://stackoverflow.com/questions/12882967/rotate-animation-android-->
+    <!--Code taken from
+    http://stackoverflow.com/questions/12882967/rotate-animation-android-->
     <rotate
         android:duration="2500"
         android:interpolator="@android:anim/linear_interpolator"

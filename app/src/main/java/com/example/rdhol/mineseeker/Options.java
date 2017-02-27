@@ -21,14 +21,11 @@ public class Options extends AppCompatActivity {
 
     public static final String OPTIONS_PREFS_KEY = "optionsPrefs";
 
-    //public static final String BOARD_SIZE_KEY = "boardSize";
     public static final String BOARD_SIZE_OPTION_KEY = "getBoardPosition";
     public static final int FOUR_BY_SIX = 0;
     public static final int FIVE_BY_TEN = 1;
     public static final int SIX_BY_FIFTEEN = 2;
-    public static final int DEFAULT_BOARD_SIZE = Options.FOUR_BY_SIX;
 
-    // public static final String MINE_NUMBER = "mineNumber";
     public static final String MINE_NUM_KEY = "getMinePosition";
     public static final int SIX_MINES = 0;
     public static final int TEN_MINES = 1;
@@ -36,7 +33,6 @@ public class Options extends AppCompatActivity {
     public static final int TWENTY_MINES = 3;
     public static final String ERASE_TIMES_PLAYED = "erasePlays";
     public static final int RESET_PLAYS = 1;
-    public static int DEFAULT_MINE_NUM = Options.SIX_MINES;
 
     Spinner mineNumSpin;
     Spinner boardSizeSpin;
@@ -114,6 +110,7 @@ public class Options extends AppCompatActivity {
                         throw new InvalidParameterException();
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }

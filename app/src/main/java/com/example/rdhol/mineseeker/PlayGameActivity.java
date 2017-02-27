@@ -25,9 +25,9 @@ import static com.example.rdhol.mineseeker.Options.OPTIONS_PREFS_KEY;
 public class PlayGameActivity extends AppCompatActivity {
     public static final String BEST_SCORE = "BEST_SCORE";
 
-
     public static final String GAMES_PLAYED = "GAMES_PLAYED";
     public static final String GET_GAMES_PLAYED = "GET_GAMES_PLAYED";
+
     public static final String SCORE_FOUR_BY_SIX_MINES_SIX = "SCORE_FOUR_BY_SIX_MINES_SIX";
     public static final String SCORE_FOUR_BY_SIX_MINES_TEN = "SCORE_FOUR_BY_SIX_MINES_TEN";
     public static final String SCORE_FOUR_BY_SIX_MINES_FIFTEEN = "SCORE_FOUR_BY_SIX_MINES_FIFTEEN";
